@@ -47,7 +47,17 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      'rust_analyzer',
     },
+    config = {
+      rust_analyzer = function()
+        return {
+          cmd = { "rustup", "run", "stable", "rust-analyzer" },
+          filetypes = { "rust" },
+          root_dir = require('lspconfig.util').root_pattern("Cargo.toml"),
+        }
+      end,
+    }
   },
   -- Configure require("lazy").setup() options
   lazy = {
@@ -63,17 +73,37 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
+    local my_group = vim.api.nvim_create_augroup('my_group', { clear = true })
+
+    -- for quick execution of python files
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'python',
+      command = 'nnoremap <F5> <cmd>w <bar> !python %<CR>',
+      group = my_group,
+    })
+
+    -- for pretty markdown syntax
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'markdown',
+      command = 'setlocal conceallevel=2',
+      group = my_group,
+    })
+
+    -- User commands
+    vim.api.nvim_create_user_command('DiffOrig', function()
+      local start = vim.api.nvim_get_current_buf()
+      vim.cmd('vnew | set buftype=nofile | read ++edit # | 0d_ | diffthis')
+      local scratch = vim.api.nvim_get_current_buf()
+
+      vim.cmd('wincmd p | diffthis')
+
+      -- Map `q` for both buffers to exit diff view and delete scratch buffer
+      for _, buf in ipairs({ scratch, start }) do
+        vim.keymap.set('n', 'q', function()
+          vim.api.nvim_buf_delete(scratch, { force = true })
+          vim.keymap.del('n', 'q', { buffer = start })
+        end, { buffer = buf })
+      end
+    end, {})
   end,
 }

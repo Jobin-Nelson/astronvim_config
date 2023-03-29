@@ -22,8 +22,67 @@ return {
       return opts
     end,
   },
+  { 'kevinhwang91/nvim-ufo',        enabled = false },
+  {
+    'hrsh7th/nvim-cmp',
+    opts = function(_, opts)
+      local snip_status_ok, luasnip = pcall(require, "luasnip")
+      if not snip_status_ok then return opts end
+
+      local cmp = require "cmp"
+      opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
+        if luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end, { "i", "s" })
+      opts.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s" })
+      return opts
+    end,
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    build = 'make install_jsregexp',
+    config = function()
+      local ls = require('luasnip')
+      require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/snippets/" })
+      vim.keymap.set({ 'i', 's' }, '<C-l>', function() if ls.choice_active() then ls.change_choice(1) end end)
+      vim.keymap.set('n', '<leader>sn', require('luasnip.loaders').edit_snippet_files)
+      ls.setup({
+        history = true,
+        updateevents = 'TextChanged,TextChangedI',
+        delete_check_events = 'TextChanged',
+        enable_autosnippets = false,
+        ex_opts = {
+          [require('luasnip.util.types').choiceNode] = {
+            active = {
+              virt_text = { { '◀', 'Error' } },
+            }
+          }
+        }
+      })
+    end,
+    {
+      "nvim-telescope/telescope.nvim",
+      opts = function(_, opts)
+        local actions = require "telescope.actions"
+        opts.default.mapping["<C-n>"] = actions.move_selection_next
+        opts.default.mapping["<C-p>"] = actions.move_selection_previous
+        opts.default.mapping["<C-j>"] = actions.cycle_history_next
+        opts.default.mapping["<C-k>"] = actions.cycle_history_prev
+        return opts
+      end,
+    }
+  },
   -- You can disable default plugins as follows:
-  -- { "max397574/better-escape.nvim", enabled = false },
+  { "max397574/better-escape.nvim", enabled = false },
   --
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   -- {
