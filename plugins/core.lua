@@ -73,10 +73,10 @@ return {
       "nvim-telescope/telescope.nvim",
       opts = function(_, opts)
         local actions = require "telescope.actions"
-        opts.default.mapping["<C-n>"] = actions.move_selection_next
-        opts.default.mapping["<C-p>"] = actions.move_selection_previous
-        opts.default.mapping["<C-j>"] = actions.cycle_history_next
-        opts.default.mapping["<C-k>"] = actions.cycle_history_prev
+        opts.defaults.mappings.i["<C-n>"] = actions.move_selection_next
+        opts.defaults.mappings.i["<C-p>"] = actions.move_selection_previous
+        opts.defaults.mappings.i["<C-j>"] = actions.cycle_history_next
+        opts.defaults.mappings.i["<C-k>"] = actions.cycle_history_prev
         return opts
       end,
     }
