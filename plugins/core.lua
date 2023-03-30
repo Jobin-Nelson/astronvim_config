@@ -49,10 +49,10 @@ return {
   },
   {
     'L3MON4D3/LuaSnip',
-    build = 'make install_jsregexp',
-    config = function()
+    config = function(plugin, opts)
+      require "plugins.configs.luasnip" (plugin, opts) -- include the default astronvim config that calls the setup call
+      require('luasnip.loaders.from_lua').load({ paths = { "~/.config/nvim/snippets" } })
       local ls = require('luasnip')
-      require('luasnip.loaders.from_lua').load({ paths = "~/.config/nvim/snippets/" })
       vim.keymap.set({ 'i', 's' }, '<C-l>', function() if ls.choice_active() then ls.change_choice(1) end end)
       vim.keymap.set('n', '<leader>sn', require('luasnip.loaders').edit_snippet_files)
       ls.setup({
@@ -69,17 +69,17 @@ return {
         }
       })
     end,
-    {
-      "nvim-telescope/telescope.nvim",
-      opts = function(_, opts)
-        local actions = require "telescope.actions"
-        opts.defaults.mappings.i["<C-n>"] = actions.move_selection_next
-        opts.defaults.mappings.i["<C-p>"] = actions.move_selection_previous
-        opts.defaults.mappings.i["<C-j>"] = actions.cycle_history_next
-        opts.defaults.mappings.i["<C-k>"] = actions.cycle_history_prev
-        return opts
-      end,
-    }
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = function(_, opts)
+      local actions = require "telescope.actions"
+      opts.defaults.mappings.i["<C-n>"] = actions.move_selection_next
+      opts.defaults.mappings.i["<C-p>"] = actions.move_selection_previous
+      opts.defaults.mappings.i["<C-j>"] = actions.cycle_history_next
+      opts.defaults.mappings.i["<C-k>"] = actions.cycle_history_prev
+      return opts
+    end,
   },
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
