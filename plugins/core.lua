@@ -23,6 +23,7 @@ return {
     end,
   },
   { 'kevinhwang91/nvim-ufo',        enabled = false },
+  { "rafamadriz/friendly-snippets", enabled = false },
   {
     'hrsh7th/nvim-cmp',
     opts = function(_, opts)
@@ -49,11 +50,12 @@ return {
   },
   {
     'L3MON4D3/LuaSnip',
-    config = function(plugin, opts)
-      require "plugins.configs.luasnip" (plugin, opts) -- include the default astronvim config that calls the setup call
+    config = function()
+      -- require "plugins.configs.luasnip" (plugin, opts) -- include the default astronvim config that calls the setup call
       require('luasnip.loaders.from_lua').load({ paths = { "~/.config/nvim/snippets" } })
       local ls = require('luasnip')
       vim.keymap.set({ 'i', 's' }, '<C-l>', function() if ls.choice_active() then ls.change_choice(1) end end)
+      vim.keymap.set({ 'i', 's' }, '<C-h>', function() if ls.choice_active() then ls.change_choice(-1) end end)
       vim.keymap.set('n', '<leader>sn', require('luasnip.loaders').edit_snippet_files)
       ls.setup({
         history = true,
@@ -89,7 +91,7 @@ return {
         hl = { fg = "fg", bg = "bg" },
         status.component.mode(),
         status.component.git_branch(),
-        status.component.file_info { filename = { fallback = "Empty" }, file_modified = false },
+        status.component.file_info { filename = { fallback = "Empty" }, file_modified = {} },
         status.component.git_diff(),
         status.component.diagnostics(),
         status.component.fill(),
