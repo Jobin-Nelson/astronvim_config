@@ -12,4 +12,9 @@ return {
   { 'tpope/vim-surround',         event = 'User AstroFile' },
   { 'dhruvasagar/vim-zoom',       event = 'User AstroFile' },
   { 'dhruvasagar/vim-table-mode', event = 'User AstroFile' },
+  {
+    'phelipetls/jsonpath.nvim',
+    event = 'User AstroFile',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  },
 }
