@@ -41,8 +41,8 @@ return {
       print('All hidden buffers have been deleted')
     end, desc = "Delete hidden buffers" },
     ["<leader>sc"] = { function()
-      if vim.env.scratch_nr then
-        local buf_nr = vim.env.scratch_nr
+      if vim.g.scratch_nr then
+        local buf_nr = vim.g.scratch_nr
         local win_ids = vim.fn.win_findbuf(buf_nr)
         if win_ids then
           for _, win_id in ipairs(win_ids) do
@@ -61,7 +61,7 @@ return {
       vim.opt_local.bufhidden = 'hide'
       vim.opt_local.swapfile = false
       vim.api.nvim_buf_set_name(buf_nr, 'scratch')
-      vim.env["scratch_nr"] = buf_nr
+      vim.g.scratch_nr = buf_nr
       vim.cmd('vert sbuffer ' .. buf_nr)
     end, desc = "Scratch buffer" },
     -- tables with the `name` key will be registered with which-key if it's installed

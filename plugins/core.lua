@@ -60,7 +60,7 @@ return {
       local ls = require('luasnip')
       vim.keymap.set({ 'i', 's' }, '<C-l>', function() if ls.choice_active() then ls.change_choice(1) end end)
       vim.keymap.set({ 'i', 's' }, '<C-h>', function() if ls.choice_active() then ls.change_choice(-1) end end)
-      vim.keymap.set('n', '<leader>sn', require('luasnip.loaders').edit_snippet_files)
+      vim.keymap.set('n', '<leader>sn', require('luasnip.loaders').edit_snippet_files, { desc = 'Open snippets' })
       ls.setup({
         history = true,
         updateevents = 'TextChanged,TextChangedI',

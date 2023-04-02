@@ -14,7 +14,7 @@ return {
   { 'dhruvasagar/vim-table-mode', event = 'User AstroFile' },
   {
     'phelipetls/jsonpath.nvim',
-    event = 'User AstroFile',
+    ft = 'json',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 }
