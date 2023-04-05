@@ -95,7 +95,7 @@ return {
         hl = { fg = "fg", bg = "bg" },
         status.component.mode(),
         status.component.git_branch(),
-        status.component.file_info { filename = { fallback = "Empty" }, file_modified = {} },
+        status.component.file_info { filetype = false, filename = { fallback = "Empty" }, file_modified = {} },
         status.component.git_diff(),
         status.component.diagnostics(),
         status.component.fill(),
