@@ -70,6 +70,10 @@ return {
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
   },
+  v = {
+    ['<'] = { '<gv', desc = "Indent inward" },
+    ['>'] = { '>gv', desc = "Indent outward" },
+  },
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
