@@ -18,7 +18,6 @@ return {
       end,
       desc = "Pick to close",
     },
-    ["<leader>a"] = { "<cmd>AerialToggle<CR>", desc = "Aerial Toggle" },
     ["<leader>bo"] = { "<cmd>update <bar> %bdelete <bar> edit# <bar> bdelete #<CR>", desc = "Delete other buffers" },
     ["<leader>bv"] = { function()
       local all_bufs = vim.tbl_filter(
