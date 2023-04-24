@@ -31,8 +31,9 @@ return {
   },
   {
     'nvim-orgmode/orgmode',
-    ft = 'org',
+    lazy = false,
     config = function()
+      require('orgmode').setup_ts_grammar()
       require('orgmode').setup({
         org_agenda_files = { '~/playground/projects/org_files/*' },
         org_default_notes_file = '~/playground/projects/org_files/refile.org',
