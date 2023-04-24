@@ -29,4 +29,14 @@ return {
       end, { desc = "Copy json path", buffer = true })
     end,
   },
+  {
+    'nvim-orgmode/orgmode',
+    ft = 'org',
+    config = function()
+      require('orgmode').setup({
+        org_agenda_files = { '~/playground/projects/org_files/*' },
+        org_default_notes_file = '~/playground/projects/org_files/refile.org',
+      })
+    end
+  }
 }

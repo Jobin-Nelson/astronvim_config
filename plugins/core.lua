@@ -49,6 +49,14 @@ return {
           fallback()
         end
       end, { "i", "s" })
+
+      opts.sources = cmp.config.sources {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
+        { name = 'orgmode' }
+      }
       return opts
     end,
   },
