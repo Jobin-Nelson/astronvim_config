@@ -35,8 +35,12 @@ return {
     config = function()
       require('orgmode').setup_ts_grammar()
       require('orgmode').setup({
-        org_agenda_files = { '~/playground/projects/org_files/*' },
+        org_agenda_files = { '~/playground/projects/org_files/**/*' },
         org_default_notes_file = '~/playground/projects/org_files/refile.org',
+        org_archive_location = '~/playground/projects/org_files/archive_file.org',
+        org_hide_leading_stars = false,
+        org_hide_emphasis_markers = true,
+        org_agenda_span = 'week',
       })
     end
   }
