@@ -99,6 +99,12 @@ return {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
       local status = require("astronvim.utils.status")
+      opts.opts.disable_winbar_cb = function(args)
+        return status.condition.buffer_matches({
+          buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
+          filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial", 'org', 'gitcommit' },
+        }, args.buf)
+      end
       opts.statusline = {
         hl = { fg = "fg", bg = "bg" },
         status.component.mode(),

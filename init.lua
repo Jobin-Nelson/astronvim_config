@@ -83,11 +83,11 @@ return {
     })
 
     -- for pretty markdown syntax
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = 'markdown',
-      command = 'setlocal conceallevel=2',
-      group = my_group,
-    })
+    -- vim.api.nvim_create_autocmd('FileType', {
+    --   pattern = 'markdown',
+    --   command = 'setlocal conceallevel=2',
+    --   group = my_group,
+    -- })
 
     -- User commands
     vim.api.nvim_create_user_command('DiffOrig', function()
