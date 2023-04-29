@@ -10,14 +10,6 @@ return {
     -- mappings seen under group name "Buffer"
     ["|"] = false,
     ["<leader>o"] = false,
-    ["<leader>ro"] = {
-      "<cmd>edit +$ ~/playground/projects/org_files/refile.org<cr>",
-      desc = "Open org refile"
-    },
-    ["<leader>rw"] = {
-      "<cmd>edit +$ ~/playground/dev/illumina/ticket_notes/work/work_refile.org<cr>",
-      desc = "Open work refile"
-    },
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bD"] = {
       function()
