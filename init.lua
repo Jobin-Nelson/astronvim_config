@@ -78,7 +78,7 @@ return {
     -- for quick execution of python files
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'python',
-      command = 'nnoremap <F5> <cmd>w <bar> !python %<CR>',
+      command = 'nnoremap <F5> <cmd>update <bar> !python %<CR>',
       group = my_group,
     })
 

@@ -49,6 +49,8 @@ return {
         org_indent_mode = 'noindent',
         org_log_into_drawer = 'LOGBOOK',
       })
+      vim.keymap.set('n', 'yi=', '<cmd>normal! mmf=yT=`m<CR>', { desc = 'Copy org = inline code' })
+      vim.keymap.set('n', 'yi~', '<cmd>normal! mmf=yT=`m<CR>', { desc = 'Copy org ~ inline code' })
     end
   }
 }
