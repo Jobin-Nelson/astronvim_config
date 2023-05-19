@@ -9,9 +9,9 @@ return {
   --     require("lsp_signature").setup()
   --   end,
   -- },
-  { 'dhruvasagar/vim-zoom',       event = 'VeryLazy' },
-  { 'dhruvasagar/vim-table-mode', event = 'VeryLazy' },
-  { 'kylechui/nvim-surround',     event = 'VeryLazy', opts = {} },
+  { 'dhruvasagar/vim-zoom',       event = 'User AstroFile' },
+  { 'dhruvasagar/vim-table-mode', event = 'User AstroFile' },
+  { 'kylechui/nvim-surround',     event = 'User AstroFile', opts = {} },
   {
     'phelipetls/jsonpath.nvim',
     ft = 'json',

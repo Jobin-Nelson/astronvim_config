@@ -23,43 +23,9 @@ return {
     end,
   },
   { 'kevinhwang91/nvim-ufo',        enabled = false },
-  { "rafamadriz/friendly-snippets", enabled = false },
-  { "SchemaStore.nvim",             enabled = false },
   { "jay-babu/mason-nvim-dap.nvim", enabled = false },
   { "nvim-dap",                     enabled = false },
   { "nvim-dap-ui",                  enabled = false },
-  {
-    'hrsh7th/nvim-cmp',
-    opts = function(_, opts)
-      local snip_status_ok, luasnip = pcall(require, "luasnip")
-      if not snip_status_ok then return opts end
-
-      local cmp = require "cmp"
-      opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
-        if luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        else
-          fallback()
-        end
-      end, { "i", "s" })
-      opts.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { "i", "s" })
-
-      opts.sources = cmp.config.sources {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer" },
-        { name = "path" },
-        { name = 'orgmode' }
-      }
-      return opts
-    end,
-  },
   {
     'L3MON4D3/LuaSnip',
     config = function()
@@ -99,17 +65,17 @@ return {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
       local status = require("astronvim.utils.status")
-      opts.opts.disable_winbar_cb = function(args)
-        return status.condition.buffer_matches({
-          buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
-          filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial", 'org', 'gitcommit' },
-        }, args.buf)
-      end
+      -- opts.opts.disable_winbar_cb = function(args)
+      --   return status.condition.buffer_matches({
+      --     buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
+      --     filetype = { "NvimTree", "neo%-tree", "dashboard", "Outline", "aerial", 'org', 'gitcommit' },
+      --   }, args.buf)
+      -- end
       opts.statusline = {
         hl = { fg = "fg", bg = "bg" },
-        status.component.mode(),
+        status.component.mode { mode_text = { padding = { left = 1, right = 1 } } },
         status.component.git_branch(),
-        status.component.file_info { filetype = false, filename = { fallback = "Empty" }, file_modified = {} },
+        status.component.file_info { filetype = false, filename = {}, file_modified = {} },
         status.component.git_diff(),
         status.component.diagnostics(),
         status.component.fill(),
@@ -118,7 +84,7 @@ return {
         status.component.lsp(),
         status.component.treesitter(),
         status.component.nav(),
-        status.component.mode { surround = { separator = "right" } },
+        -- status.component.mode { surround = { separator = "right" } },
       }
 
       return opts

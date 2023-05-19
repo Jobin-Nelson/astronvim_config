@@ -23,6 +23,11 @@ return {
     virtual_text = true,
     underline = true,
   },
+  heirline = {
+    attributes = {
+      mode = { bold = true },
+    }
+  },
   lsp = {
     -- customize lsp formatting options
     formatting = {
