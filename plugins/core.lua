@@ -22,7 +22,6 @@ return {
       return opts
     end,
   },
-  { 'kevinhwang91/nvim-ufo',        enabled = false },
   { "jay-babu/mason-nvim-dap.nvim", enabled = false },
   { "nvim-dap",                     enabled = false },
   { "nvim-dap-ui",                  enabled = false },
