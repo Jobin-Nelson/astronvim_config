@@ -25,6 +25,7 @@ return {
   { "jay-babu/mason-nvim-dap.nvim", enabled = false },
   { "nvim-dap",                     enabled = false },
   { "nvim-dap-ui",                  enabled = false },
+  { "max397574/better-escape.nvim", enabled = false },
   {
     'L3MON4D3/LuaSnip',
     config = function()
@@ -72,7 +73,7 @@ return {
       -- end
       opts.statusline = {
         hl = { fg = "fg", bg = "bg" },
-        status.component.mode { mode_text = { padding = { left = 1, right = 1 } } },
+        status.component.mode(),
         status.component.git_branch(),
         status.component.file_info { filetype = false, filename = {}, file_modified = {} },
         status.component.git_diff(),
@@ -83,14 +84,12 @@ return {
         status.component.lsp(),
         status.component.treesitter(),
         status.component.nav(),
-        -- status.component.mode { surround = { separator = "right" } },
+        status.component.mode { surround = { separator = "right" } },
       }
 
       return opts
     end,
   },
-  -- You can disable default plugins as follows:
-  { "max397574/better-escape.nvim", enabled = false },
   --
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   -- {
