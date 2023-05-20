@@ -21,6 +21,10 @@ local function get_dotfiles()
     table.insert(dotfiles, file_path)
   end
 
+  if vim.tbl_isempty(dotfiles) then
+    error('No dotfiles found in array FILES in econf.sh')
+  end
+
   econf:close()
   return dotfiles
 end
@@ -103,20 +107,20 @@ M.find_dotfiles = function()
 end
 
 M.email_update = function()
-  local file = io.open(vim.fn.expand('~/.bashrc'))
+  local bashrc = io.open(vim.fn.expand('~/.bashrc'))
 
-  if file == nil then
+  if bashrc == nil then
     error('No bashrc file found')
   end
 
   local command = ''
-  for line in file:lines() do
+  for line in bashrc:lines() do
     if string.match(line, '^alias eup=') then
       command = string.match(line, ".*='%${EDITOR:%-nvim} (.*)'$")
       break
     end
   end
-  file:close()
+  bashrc:close()
 
   if command == '' then
     error('No alias "eup" found in bashrc file')
@@ -125,7 +129,7 @@ M.email_update = function()
   vim.fn.jobstart('echo ' .. command, {
     stdout_buffered = true,
     on_stdout = function(_, data)
-      vim.cmd.vsplit(vim.fn.expand(data[1]))
+      vim.cmd.vsplit(data[1])
     end
   })
 end

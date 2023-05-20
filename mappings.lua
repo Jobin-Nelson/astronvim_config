@@ -17,10 +17,10 @@ return {
     ["<leader>bh"] = { require('user.custom.utils').delete_hidden_buffers, desc = "Delete hidden buffers" },
     ["<leader>sc"] = { require('user.custom.utils').scratch_buffer, desc = "Scratch buffer" },
     ['<leader>ss'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Substitute word' },
+    ['<leader>se'] = { require('user.custom.utils').email_update, desc = 'Send Email Update' },
     ['<leader>fO'] = { require('user.custom.utils').find_org_files, desc = 'Find Org Files' },
     ['<leader>fs'] = { require('user.custom.utils').find_second_brain_files, desc = 'Find Second Brain Files' },
     ['<leader>fd'] = { require('user.custom.utils').find_dotfiles, desc = 'Find Dotfiles' },
-    ['<leader>se'] = { require('user.custom.utils').email_update, desc = 'Send Email Update' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },
