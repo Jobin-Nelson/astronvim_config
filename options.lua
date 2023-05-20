@@ -10,7 +10,8 @@ return {
     cursorline = false,
     conceallevel = 2,
     cmdheight = 1,
-    diffopt = { "internal", "filler", "closeoff", "hiddenoff", "algorithm:minimal" }
+    diffopt = { "internal", "filler", "closeoff", "hiddenoff", "algorithm:minimal" },
+    formatoptions = vim.opt.formatoptions - 'o'
   },
   g = {
     mapleader = " ",                 -- sets vim.g.mapleader
