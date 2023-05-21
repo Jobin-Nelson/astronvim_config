@@ -12,18 +12,20 @@ return {
     ["<leader>o"] = false,
     ["<leader>b"] = { name = "Buffers" }, -- this is useful for naming menus
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
-    ["<leader>bD"] = { require('user.custom.utils').delete_buffer, desc = "Pick to close", },
     ["<leader>bo"] = { "<cmd>update <bar> %bdelete <bar> edit# <bar> bdelete #<CR>", desc = "Delete other buffers" },
-    ["<leader>bh"] = { require('user.custom.utils').delete_hidden_buffers, desc = "Delete hidden buffers" },
-    ["<leader>sc"] = { require('user.custom.utils').scratch_buffer, desc = "Scratch buffer" },
+    ["<leader>bD"] = { "<cmd>lua require('user.custom.utils').delete_buffer()<cr>", desc = "Pick to close", },
+    ["<leader>bh"] = { "<cmd>lua require('user.custom.utils').delete_hidden_buffers()<cr>", desc =
+    "Delete hidden buffers" },
+    ["<leader>sc"] = { "<cmd>lua require('user.custom.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
+    ['<leader>se'] = { "<cmd>lua require('user.custom.utils').email_update()<cr>", desc = 'Send Email Update' },
     ['<leader>ss'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Substitute word' },
-    ['<leader>se'] = { require('user.custom.utils').email_update, desc = 'Send Email Update' },
-    ['<leader>fO'] = { require('user.custom.utils').find_org_files, desc = 'Find Org Files' },
-    ['<leader>fs'] = { require('user.custom.utils').find_second_brain_files, desc = 'Find Second Brain Files' },
-    ['<leader>fd'] = { require('user.custom.utils').find_dotfiles, desc = 'Find Dotfiles' },
-    ['<leader>fp'] = { require('user.custom.my_pickers').find_projects, desc = 'Find projects' },
-    ['<leader>fz'] = { require('user.custom.my_pickers').find_zoxide, desc = 'Find projects' },
-    ['<leader>oT'] = { require('user.custom.org-tangle').tangle, desc = 'Org Tangle' }
+    ['<leader>fO'] = { "<cmd>lua require('user.custom.utils').find_org_files()<cr>", desc = 'Find Org Files' },
+    ['<leader>fs'] = { "<cmd>lua require('user.custom.utils').find_second_brain_files()<cr>", desc =
+    'Find Second Brain Files' },
+    ['<leader>fd'] = { "<cmd>lua require('user.custom.utils').find_dotfiles()<cr>", desc = 'Find Dotfiles' },
+    ['<leader>fp'] = { "<cmd>lua require('user.custom.my_pickers').find_projects()<cr>", desc = 'Find projects' },
+    ['<leader>fz'] = { "<cmd>lua require('user.custom.my_pickers').find_zoxide()<cr>", desc = 'Find projects' },
+    ['<leader>oT'] = { "<cmd>lua require('user.custom.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },
