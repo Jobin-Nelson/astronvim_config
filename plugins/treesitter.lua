@@ -24,7 +24,8 @@ return {
       'help',
       'vim',
       'commonlisp',
-      'org'
+      'org',
+      'query'
     },
   },
 }

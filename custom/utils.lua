@@ -1,5 +1,3 @@
-local M = {}
-
 local function get_dotfiles()
   local econf_file = vim.fn.expand('~/.local/bin/econf.sh')
 
@@ -28,6 +26,8 @@ local function get_dotfiles()
   econf:close()
   return dotfiles
 end
+
+local M = {}
 
 M.delete_buffer = function()
   require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)

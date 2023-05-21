@@ -52,5 +52,10 @@ return {
       vim.keymap.set('n', 'yi=', '<cmd>normal! mmf=yT=`m<CR>', { desc = 'Copy org = inline code' })
       vim.keymap.set('n', 'yi~', '<cmd>normal! mmf~yT~`m<CR>', { desc = 'Copy org ~ inline code' })
     end
+  },
+  {
+    'nvim-treesitter/playground',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    cmd = 'TSPlaygroundToggle',
   }
 }

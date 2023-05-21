@@ -21,6 +21,9 @@ return {
     ['<leader>fO'] = { require('user.custom.utils').find_org_files, desc = 'Find Org Files' },
     ['<leader>fs'] = { require('user.custom.utils').find_second_brain_files, desc = 'Find Second Brain Files' },
     ['<leader>fd'] = { require('user.custom.utils').find_dotfiles, desc = 'Find Dotfiles' },
+    ['<leader>fp'] = { require('user.custom.my_pickers').find_projects, desc = 'Find projects' },
+    ['<leader>fz'] = { require('user.custom.my_pickers').find_zoxide, desc = 'Find projects' },
+    ['<leader>oT'] = { require('user.custom.org-tangle').tangle, desc = 'Org Tangle' }
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },
