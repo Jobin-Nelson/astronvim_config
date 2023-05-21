@@ -88,6 +88,6 @@ return {
     })
 
     -- User commands
-    vim.api.nvim_create_user_command('DiffOrig', require('user.custom.commands').diff_original, {})
+    vim.api.nvim_create_user_command('DiffOrig', require('user.jobin.commands').diff_original, {})
   end,
 }

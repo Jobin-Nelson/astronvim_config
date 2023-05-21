@@ -21,7 +21,6 @@ return {
       'javascript',
       'typescript',
       'tsx',
-      'help',
       'vim',
       'commonlisp',
       'org',

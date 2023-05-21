@@ -13,19 +13,19 @@ return {
     ["<leader>b"] = { name = "Buffers" }, -- this is useful for naming menus
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
     ["<leader>bo"] = { "<cmd>update <bar> %bdelete <bar> edit# <bar> bdelete #<CR>", desc = "Delete other buffers" },
-    ["<leader>bD"] = { "<cmd>lua require('user.custom.utils').delete_buffer()<cr>", desc = "Pick to close", },
-    ["<leader>bh"] = { "<cmd>lua require('user.custom.utils').delete_hidden_buffers()<cr>", desc =
+    ["<leader>bD"] = { "<cmd>lua require('user.jobin.utils').delete_buffer()<cr>", desc = "Pick to close", },
+    ["<leader>bh"] = { "<cmd>lua require('user.jobin.utils').delete_hidden_buffers()<cr>", desc =
     "Delete hidden buffers" },
-    ["<leader>sc"] = { "<cmd>lua require('user.custom.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
-    ['<leader>se'] = { "<cmd>lua require('user.custom.utils').email_update()<cr>", desc = 'Send Email Update' },
+    ["<leader>sc"] = { "<cmd>lua require('user.jobin.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
+    ['<leader>se'] = { "<cmd>lua require('user.jobin.utils').email_update()<cr>", desc = 'Send Email Update' },
     ['<leader>ss'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Substitute word' },
-    ['<leader>fO'] = { "<cmd>lua require('user.custom.utils').find_org_files()<cr>", desc = 'Find Org Files' },
-    ['<leader>fs'] = { "<cmd>lua require('user.custom.utils').find_second_brain_files()<cr>", desc =
+    ['<leader>fO'] = { "<cmd>lua require('user.jobin.utils').find_org_files()<cr>", desc = 'Find Org Files' },
+    ['<leader>fs'] = { "<cmd>lua require('user.jobin.utils').find_second_brain_files()<cr>", desc =
     'Find Second Brain Files' },
-    ['<leader>fd'] = { "<cmd>lua require('user.custom.utils').find_dotfiles()<cr>", desc = 'Find Dotfiles' },
-    ['<leader>fp'] = { "<cmd>lua require('user.custom.my_pickers').find_projects()<cr>", desc = 'Find projects' },
-    ['<leader>fz'] = { "<cmd>lua require('user.custom.my_pickers').find_zoxide()<cr>", desc = 'Find projects' },
-    ['<leader>oT'] = { "<cmd>lua require('user.custom.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
+    ['<leader>fd'] = { "<cmd>lua require('user.jobin.utils').find_dotfiles()<cr>", desc = 'Find Dotfiles' },
+    ['<leader>fp'] = { "<cmd>lua require('user.jobin.my_pickers').find_projects()<cr>", desc = 'Find projects' },
+    ['<leader>fz'] = { "<cmd>lua require('user.jobin.my_pickers').find_zoxide()<cr>", desc = 'Find projects' },
+    ['<leader>oT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },
