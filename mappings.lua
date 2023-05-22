@@ -26,6 +26,8 @@ return {
     ['<leader>fp'] = { "<cmd>lua require('user.jobin.my_pickers').find_projects()<cr>", desc = 'Find projects' },
     ['<leader>fz'] = { "<cmd>lua require('user.jobin.my_pickers').find_zoxide()<cr>", desc = 'Find projects' },
     ['<leader>oT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
+    ['<A-h>'] = { '<cmd>ToggleTerm size=20 direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
+    ['<A-v>'] = { '<cmd>ToggleTerm size=80 direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },
@@ -34,5 +36,8 @@ return {
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
+    ['<A-h>'] = { '<C-\\><C-n><cmd>ToggleTerm direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
+    ['<A-v>'] = { '<C-\\><C-n><cmd>ToggleTerm direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
+    ['<C-w>'] = { '<C-\\><C-n><C-w>', desc = 'ToggleTerm window command' },
   },
 }
