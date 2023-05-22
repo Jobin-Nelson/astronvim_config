@@ -81,29 +81,27 @@ M.scratch_buffer = function()
 end
 
 M.find_org_files = function()
-  local opts = {}
-  opts.search_dirs = {
-    '~/playground/projects/org_files/',
-    '~/playground/dev/illumina/ticket_notes/work/',
-  }
-  opts.prompt_title = 'Org Files'
-  require('telescope.builtin').find_files(opts)
+  require('telescope.builtin').find_files({
+    search_dirs = {
+      '~/playground/projects/org_files/',
+      '~/playground/dev/illumina/ticket_notes/work/',
+    },
+    prompt_title = 'Org Files',
+  })
 end
 
 M.find_second_brain_files = function()
-  local opts = {}
-  opts.search_dirs = {
-    '$HOME/playground/projects/second_brain'
-  }
-  opts.prompt_title = 'Second Brain Files'
-  require('telescope.builtin').find_files(opts)
+  require('telescope.builtin').find_files({
+    search_dirs = '$HOME/playground/projects/second_brain',
+    prompt_title = 'Second Brain Files',
+  })
 end
 
 M.find_dotfiles = function()
-  local opts = {}
-  opts.search_dirs = get_dotfiles()
-  opts.prompt_title = 'Find Dotfiles'
-  require('telescope.builtin').find_files(opts)
+  require('telescope.builtin').find_files({
+    search_dirs = get_dotfiles(),
+    prompt_title = 'Find Dotfiles',
+  })
 end
 
 M.email_update = function()
@@ -133,5 +131,31 @@ M.email_update = function()
     end
   })
 end
+
+M.rename_buffer = function()
+  local original_bufnr = vim.api.nvim_get_current_buf()
+  local original_filename = vim.api.nvim_buf_get_name(0)
+  local prompt = 'Rename: '
+
+  local new_filename = vim.fn.input({
+    prompt = prompt,
+    default = original_filename,
+    completion = 'file',
+  })
+
+  if new_filename == '' then
+    return
+  end
+
+  vim.cmd('update | saveas ++p ' .. new_filename)
+  local alternate_bufnr = vim.fn.bufnr('#')
+  if vim.fn.bufexists(alternate_bufnr) then
+    vim.api.nvim_buf_delete(alternate_bufnr, {})
+  end
+  vim.fn.delete(original_filename)
+  print('Renamed to ' .. new_filename)
+end
+-- vim.keymap.set('n', '<leader>rt', M.rename_buffer)
+-- vim.keymap.set('n', '<leader>rr', ':update | luafile %<cr>')
 
 return M

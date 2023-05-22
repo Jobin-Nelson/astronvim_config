@@ -72,7 +72,7 @@ end
 M.find_zoxide = function()
   local opts = dropdown_theme
   pickers.new(opts, {
-    prompt_title = 'Projects',
+    prompt_title = 'Zoxide',
     finder = finders.new_table({
       results = utils.get_os_command_output(vim.fn.split('zoxide query -ls')),
       entry_maker = zoxide_entry_maker,
