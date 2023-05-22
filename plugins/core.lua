@@ -26,28 +26,12 @@ return {
   { "nvim-dap",                     enabled = false },
   { "nvim-dap-ui",                  enabled = false },
   { "max397574/better-escape.nvim", enabled = false },
+  { "nvim-ufo",                     enabled = false },
   {
     'L3MON4D3/LuaSnip',
-    config = function()
-      -- require "plugins.configs.luasnip" (plugin, opts) -- include the default astronvim config that calls the setup call
-      require('luasnip.loaders.from_lua').load({ paths = { "~/.config/nvim/snippets" } })
-      local ls = require('luasnip')
-      vim.keymap.set({ 'i', 's' }, '<C-l>', function() if ls.choice_active() then ls.change_choice(1) end end)
-      vim.keymap.set({ 'i', 's' }, '<C-h>', function() if ls.choice_active() then ls.change_choice(-1) end end)
-      vim.keymap.set('n', '<leader>sn', require('luasnip.loaders').edit_snippet_files, { desc = 'Open snippets' })
-      ls.setup({
-        history = true,
-        updateevents = 'TextChanged,TextChangedI',
-        delete_check_events = 'TextChanged',
-        enable_autosnippets = false,
-        ex_opts = {
-          [require('luasnip.util.types').choiceNode] = {
-            active = {
-              virt_text = { { '◀', 'Error' } },
-            }
-          }
-        }
-      })
+    config = function(plugin, opts)
+      require "plugins.configs.luasnip" (plugin, opts) -- include the default astronvim config that calls the setup call
+      require('luasnip.loaders.from_lua').load({ paths = { "./lua/user/snippets" } })
     end,
   },
   {
