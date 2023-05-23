@@ -18,6 +18,7 @@ return {
     ["<leader>bh"] = { "<cmd>lua require('user.jobin.utils').delete_hidden_buffers()<cr>", desc =
     "Delete hidden buffers" },
     ["<leader>bR"] = { "<cmd>lua require('user.jobin.utils').rename_buffer()<cr>", desc = 'Rename buffer' },
+    ["<leader>bk"] = { "<cmd>call delete(expand('%:p')) <bar> bdelete!<cr>", desc = 'Kill buffer & delete file' },
     -- telescope
     ['<leader>fO'] = { "<cmd>lua require('user.jobin.utils').find_org_files()<cr>", desc = 'Find Org Files' },
     ['<leader>fs'] = { "<cmd>lua require('user.jobin.utils').find_second_brain_files()<cr>", desc =
@@ -31,7 +32,7 @@ return {
     ['<A-v>'] = { '<cmd>ToggleTerm size=80 direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
     -- others
     ["<leader>sc"] = { "<cmd>lua require('user.jobin.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
-    ['<leader>se'] = { "<cmd>lua require('user.jobin.utils').email_update()<cr>", desc = 'Send Email Update' },
+    ['<leader>se'] = { "<cmd>lua require('user.jobin.work_stuff.email_update').open()<cr>", desc = 'Send Email Update' },
     ['<leader>ss'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Substitute word' },
   },
   v = {

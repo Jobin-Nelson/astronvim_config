@@ -83,6 +83,7 @@ M.tangle = function()
 
   local target = get_target_file(bufnr, root)
   create_file(target, bufnr, root)
+  print('Tangled to ' .. target)
 end
 
 return M

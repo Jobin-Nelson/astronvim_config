@@ -92,7 +92,7 @@ end
 
 M.find_second_brain_files = function()
   require('telescope.builtin').find_files({
-    search_dirs = '$HOME/playground/projects/second_brain',
+    search_dirs = { '~/playground/projects/second_brain' },
     prompt_title = 'Second Brain Files',
   })
 end
@@ -104,36 +104,7 @@ M.find_dotfiles = function()
   })
 end
 
-M.email_update = function()
-  local bashrc = io.open(vim.fn.expand('~/.bashrc'))
-
-  if bashrc == nil then
-    error('No bashrc file found')
-  end
-
-  local command = ''
-  for line in bashrc:lines() do
-    if string.match(line, '^alias eup=') then
-      command = string.match(line, ".*='%${EDITOR:%-nvim} (.*)'$")
-      break
-    end
-  end
-  bashrc:close()
-
-  if command == '' then
-    error('No alias "eup" found in bashrc file')
-  end
-
-  vim.fn.jobstart('echo ' .. command, {
-    stdout_buffered = true,
-    on_stdout = function(_, data)
-      vim.cmd.vsplit(data[1])
-    end
-  })
-end
-
 M.rename_buffer = function()
-  local original_bufnr = vim.api.nvim_get_current_buf()
   local original_filename = vim.api.nvim_buf_get_name(0)
   local prompt = 'Rename: '
 

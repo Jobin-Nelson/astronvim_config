@@ -89,5 +89,8 @@ return {
 
     -- User commands
     vim.api.nvim_create_user_command('DiffOrig', require('user.jobin.commands').diff_original, {})
+
+    -- Work related
+    require('user.jobin.work_stuff.macros')
   end,
 }
