@@ -21,8 +21,7 @@ local function get_alias_command()
 end
 
 local function has_previous_update(current_update)
-  local previous_file = nil
-  local number_of_files = 0
+  local previous_file, number_of_files = nil, 0
   for file in vim.fs.dir(vim.fs.dirname(current_update)) do
     if number_of_files == 2 then
       break
@@ -68,14 +67,14 @@ local function setup_email(current_update, previous_update)
     vim.cmd(string.format('tabedit %s | vsplit %s', previous_update, current_update))
   else
     vim.cmd('tabedit ' .. current_update)
-    print('Previous update not found')
+    print('No previous update found since 10 days ago')
   end
 end
 
 local function email_win_leave_callback(original_win, tab_bufs, should_save)
   if should_save then
     vim.cmd('update | tabclose')
-    vim.print("Updated to today's email")
+    vim.print("Updated today's email")
   else
     vim.cmd('tabclose')
   end

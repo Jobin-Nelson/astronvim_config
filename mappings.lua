@@ -10,6 +10,7 @@ return {
     -- mappings seen under group name "Buffer"
     ["|"] = false,
     ["<leader>o"] = false,
+    ["<leader>h"] = false,
     -- buffers
     ["<leader>b"] = { name = "Buffers" }, -- this is useful for naming menus
     ["<leader>bn"] = { "<cmd>tabnew<cr>", desc = "New tab" },
@@ -26,7 +27,6 @@ return {
     ['<leader>fd'] = { "<cmd>lua require('user.jobin.utils').find_dotfiles()<cr>", desc = 'Find Dotfiles' },
     ['<leader>fp'] = { "<cmd>lua require('user.jobin.my_pickers').find_projects()<cr>", desc = 'Find projects' },
     ['<leader>fz'] = { "<cmd>lua require('user.jobin.my_pickers').find_zoxide()<cr>", desc = 'Find projects' },
-    ['<leader>oT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
     -- terminal
     ['<A-h>'] = { '<cmd>ToggleTerm size=20 direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
     ['<A-v>'] = { '<cmd>ToggleTerm size=80 direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
@@ -34,6 +34,9 @@ return {
     ["<leader>sc"] = { "<cmd>lua require('user.jobin.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
     ['<leader>se'] = { "<cmd>lua require('user.jobin.work_stuff.email_update').open()<cr>", desc = 'Send Email Update' },
     ['<leader>ss'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Substitute word' },
+    ['<leader>st'] = { "<cmd>lua require('user.jobin.work_stuff.get_ticket').populate_ticket()<cr>", desc =
+    'Source Ticket' },
+    ['<leader>oT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },
