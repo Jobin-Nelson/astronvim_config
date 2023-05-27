@@ -31,7 +31,8 @@ return {
   },
   {
     'nvim-orgmode/orgmode',
-    event = 'VeryLazy',
+    -- event = 'VeryLazy',
+    lazy = false,
     config = function()
       require('orgmode').setup_ts_grammar()
       require('orgmode').setup({

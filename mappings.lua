@@ -19,7 +19,7 @@ return {
     ["<leader>bh"] = { "<cmd>lua require('user.jobin.utils').delete_hidden_buffers()<cr>", desc =
     "Delete hidden buffers" },
     ["<leader>bR"] = { "<cmd>lua require('user.jobin.utils').rename_buffer()<cr>", desc = 'Rename buffer' },
-    ["<leader>bk"] = { "<cmd>call delete(expand('%:p')) <bar> bdelete!<cr>", desc = 'Kill buffer & delete file' },
+    ["<leader>bk"] = { "<cmd>call delete(expand('%:p')) <bar> Bdelete!<cr>", desc = 'Kill buffer & delete file' },
     -- telescope
     ['<leader>fO'] = { "<cmd>lua require('user.jobin.utils').find_org_files()<cr>", desc = 'Find Org Files' },
     ['<leader>fs'] = { "<cmd>lua require('user.jobin.utils').find_second_brain_files()<cr>", desc =

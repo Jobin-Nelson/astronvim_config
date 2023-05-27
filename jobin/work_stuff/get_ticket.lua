@@ -9,12 +9,6 @@ local function get_issue_id()
   return vim.fn.expand('<cword>')
 end
 
-local function bail(can_fail, message)
-  if not can_fail then
-    error(message)
-  end
-end
-
 -- example json file
 -- {
 --   "jira": {
@@ -25,11 +19,14 @@ end
 local function get_link(issue_id)
   local creds_file_path = vim.fs.normalize('~/playground/dev/illumina/creds/jira.json')
   local creds = vim.fn.json_decode(vim.fn.readfile(creds_file_path))
-  bail(creds, 'No jira.json file found')
+  if not creds then
+    error('No jira.json file found')
+  end
   local link = creds.jira.link:gsub('(issueIdOrKey=)([^&]*)', string.format('%%1%s', issue_id))
   local cookie = 'Cookie: ' .. creds.jira.cookie
-  bail(link, 'No link found in jira.json')
-  bail(cookie, 'No cookie found in jira.json')
+  if not link or not cookie then
+    error('Cannot parse jira.json file')
+  end
   return link, cookie
 end
 
@@ -41,8 +38,9 @@ local function convert_to_org(html)
   local bufnr = vim.api.nvim_get_current_buf()
   local line = vim.fn.line('.')
 
-  bail(stdin, 'Cannot create stdin pipe')
-  bail(stdout, 'Cannot create stdout pipe')
+  if not stdin or not stdout then
+    error('Cannot create new pipe')
+  end
 
   local function on_exit(status)
     uv.read_stop(stdout)
@@ -61,7 +59,9 @@ local function convert_to_org(html)
 
   handle = uv.spawn(cmd, options, on_exit)
 
-  bail(handle, 'Cannot spawn pandoc process')
+  if not handle then
+    error('Cannot spawn pandoc process')
+  end
 
   uv.read_start(stdout, function(status, data)
     if data then
@@ -110,5 +110,7 @@ M.populate_ticket = function()
   local link, cookie = get_link(issue_id)
   get_ticket_details(link, cookie)
 end
+-- vim.keymap.set('n', '<leader>rt', M.populate_ticket)
+-- vim.keymap.set('n', '<leader>rr', ':update | luafile %<cr>')
 
 return M
