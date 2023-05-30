@@ -10,6 +10,10 @@ return {
     cursorline = false,
     conceallevel = 2,
     cmdheight = 1,
+    linebreak = true,
+    breakindent = true,
+    breakindentopt = 'list:2,min:20,sbr',
+    -- showbreak = '>',
     diffopt = { "internal", "filler", "closeoff", "hiddenoff", "algorithm:minimal" },
     iskeyword = vim.opt.iskeyword + '-',
     formatoptions = vim.opt.formatoptions
