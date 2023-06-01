@@ -13,6 +13,7 @@ return {
     linebreak = true,
     breakindent = true,
     breakindentopt = 'list:2,min:20,sbr',
+    updatecount = 0,
     -- showbreak = '>',
     diffopt = { "internal", "filler", "closeoff", "hiddenoff", "algorithm:minimal" },
     iskeyword = vim.opt.iskeyword + '-',

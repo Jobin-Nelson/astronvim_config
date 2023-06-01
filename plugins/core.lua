@@ -35,6 +35,20 @@ return {
     end,
   },
   {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      local cmp = require "cmp"
+      opts.sources = cmp.config.sources {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+        { name = 'path' },
+        { name = 'orgmode' },
+      }
+      return opts
+    end,
+  },
+  {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
       local actions = require "telescope.actions"
