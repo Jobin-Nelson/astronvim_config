@@ -56,6 +56,15 @@ return {
       opts.defaults.mappings.i["<C-p>"] = actions.move_selection_previous
       opts.defaults.mappings.i["<C-j>"] = actions.cycle_history_next
       opts.defaults.mappings.i["<C-k>"] = actions.cycle_history_prev
+      opts.pickers = {
+        buffers = {
+          mappings = {
+            n = {
+              ['d'] = 'delete_buffer'
+            }
+          }
+        }
+      }
       return opts
     end,
   },
