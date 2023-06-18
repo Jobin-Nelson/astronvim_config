@@ -37,10 +37,13 @@ return {
     ['<leader>st'] = { "<cmd>lua require('user.jobin.work_stuff.get_ticket').populate_ticket()<cr>", desc =
     'Source Ticket' },
     ['<leader>oT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
+    [']q'] = { "<cmd>cnext<cr>", desc = 'Next QuickFix' },
+    ['[q'] = { "<cmd>cprevious<cr>", desc = 'Previous QuickFix' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },
     ['>'] = { '>gv', desc = "Indent outward" },
+    ['P'] = { '"_dP', desc = "Paste without yanking" },
   },
   t = {
     -- setting a mapping to false will disable it
