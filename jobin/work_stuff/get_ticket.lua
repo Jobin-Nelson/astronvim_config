@@ -9,6 +9,13 @@ local function get_issue_id()
   return vim.fn.expand('<cword>')
 end
 
+-- example json file
+-- {
+--   "jira": {
+--     "link": "..."
+--     "token": "...",
+--   }
+-- }
 local function get_link(issue_id)
   local creds_file_path = vim.fs.normalize('~/playground/dev/illumina/creds/jira.json')
   local creds = vim.fn.json_decode(vim.fn.readfile(creds_file_path))
@@ -124,7 +131,7 @@ M.populate_ticket = function()
   local link, token = get_link(issue_id)
   populate_ticket_details(link, token)
 end
-vim.keymap.set('n', '<leader>rt', M.populate_ticket)
-vim.keymap.set('n', '<leader>rr', ':update | luafile %<cr>')
+-- vim.keymap.set('n', '<leader>rt', M.populate_ticket)
+-- vim.keymap.set('n', '<leader>rr', ':update | luafile %<cr>')
 
 return M
