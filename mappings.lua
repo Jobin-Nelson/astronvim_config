@@ -36,6 +36,8 @@ return {
     ['<leader>ss'] = { '<cmd>%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Substitute word' },
     ['<leader>st'] = { "<cmd>lua require('user.jobin.work_stuff.get_ticket').populate_ticket()<cr>", desc =
     'Source Ticket' },
+    ['<leader>sj'] = { "<cmd>lua require('user.jobin.utils').journal_today()<cr>", desc = 'Journal Today' },
+    ['<leader>sJ'] = { "<cmd>lua require('user.jobin.utils').journal_search()<cr>", desc = 'Journal Search' },
     ['<leader>oT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
     [']q'] = { "<cmd>cnext<cr>", desc = 'Next QuickFix' },
     ['[q'] = { "<cmd>cprevious<cr>", desc = 'Previous QuickFix' },
