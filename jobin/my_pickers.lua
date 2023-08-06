@@ -90,4 +90,12 @@ M.find_zoxide = function()
   }):find()
 end
 
+M.find_journal = function()
+  local journal_dir = '~/playground/projects/second_brain/Resources/journal/'
+  require('telescope.builtin').live_grep({
+    prompt_title = 'Find Journal',
+    search_dirs = {journal_dir}
+  })
+end
+
 return M
