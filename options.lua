@@ -7,6 +7,8 @@ return {
     spell = false,         -- sets vim.opt.spell
     signcolumn = "yes",    -- sets vim.opt.signcolumn to auto
     wrap = false,          -- sets vim.opt.wrap
+    scrolloff = 8,
+    sidescrolloff = 10,
     cursorline = false,
     conceallevel = 2,
     cmdheight = 1,
