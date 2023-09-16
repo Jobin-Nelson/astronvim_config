@@ -26,6 +26,7 @@ return {
   { "nvim-dap",                     enabled = false },
   { "nvim-dap-ui",                  enabled = false },
   { "max397574/better-escape.nvim", enabled = false },
+  { "guess-indent.nvim",            enabled = false },
   { "nvim-ufo",                     enabled = false },
   -- { 'lukas-reineke/indent-blankline.nvim', enabled = false},
   {
