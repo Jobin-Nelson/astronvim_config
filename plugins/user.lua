@@ -32,7 +32,7 @@ return {
   },
   {
     'nvim-orgmode/orgmode',
-    -- event = 'VeryLazy',
+    event = 'VeryLazy',
     lazy = false,
     config = function()
       require('orgmode').setup_ts_grammar()
@@ -51,8 +51,13 @@ return {
         org_indent_mode = 'noindent',
         org_log_into_drawer = 'LOGBOOK',
       })
-      vim.keymap.set('n', 'yi=', '<cmd>normal! mmf=yT=`m<CR>', { desc = 'Copy org = inline code' })
-      vim.keymap.set('n', 'yi~', '<cmd>normal! mmf~yT~`m<CR>', { desc = 'Copy org ~ inline code' })
+
+      for _, key in ipairs({ '=', '~'}) do
+        vim.keymap.set('v', 'i'..key, string.format('t%soT%s', key, key), { desc = 'inner org =' })
+        vim.keymap.set('v', 'a'..key, string.format('f%soF%s', key, key), { desc = 'around org =' })
+        vim.keymap.set('o', 'i'..key, string.format('<cmd>normal! t%svT%s<CR>', key, key), { desc = 'inner org =' })
+        vim.keymap.set('o', 'a'..key, string.format('<cmd>normal! f%svF%s<CR>', key, key), { desc = 'around org =' })
+      end
     end
   },
   {
