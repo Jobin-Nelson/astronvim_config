@@ -38,6 +38,7 @@ return {
     ['<leader>st'] = { "<cmd>lua require('user.jobin.work_stuff.get_ticket').populate_ticket()<cr>", desc =
     'Source Ticket' },
     ['<leader>sj'] = { "<cmd>lua require('user.jobin.utils').start_journal()<cr>", desc = 'Start Journal' },
+    ['<leader>sr'] = { "<cmd>lua require('user.jobin.work_stuff.test_tracking').generate_csv()<cr>", desc = 'Test Tracking' },
     ['<leader>oT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
     [']q'] = { "<cmd>cnext<cr>", desc = 'Next QuickFix' },
     ['[q'] = { "<cmd>cprevious<cr>", desc = 'Previous QuickFix' },
