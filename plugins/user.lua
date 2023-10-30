@@ -53,10 +53,10 @@ return {
       })
 
       for _, key in ipairs({ '=', '~'}) do
-        vim.keymap.set('v', 'i'..key, string.format('t%soT%s', key, key), { desc = 'inner org =' })
-        vim.keymap.set('v', 'a'..key, string.format('f%soF%s', key, key), { desc = 'around org =' })
-        vim.keymap.set('o', 'i'..key, string.format('<cmd>normal! t%svT%s<CR>', key, key), { desc = 'inner org =' })
-        vim.keymap.set('o', 'a'..key, string.format('<cmd>normal! f%svF%s<CR>', key, key), { desc = 'around org =' })
+        vim.keymap.set('v', 'i'..key, string.format('t%soT%s', key, key), { desc = string.format('inner org %s', key) })
+        vim.keymap.set('v', 'a'..key, string.format('f%soF%s', key, key), { desc = string.format('around org %s', key) })
+        vim.keymap.set('o', 'i'..key, string.format('<cmd>normal! t%svT%s<CR>', key, key), { desc = string.format('inner org %s', key) })
+        vim.keymap.set('o', 'a'..key, string.format('<cmd>normal! f%svF%s<CR>', key, key), { desc = string.format('around org %s', key) })
       end
     end
   },
