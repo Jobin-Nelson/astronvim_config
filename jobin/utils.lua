@@ -1,48 +1,9 @@
-local function get_dotfiles()
-  local econf_file = vim.fn.expand('~/.local/bin/econf.sh')
-
-  local econf = io.open(econf_file, 'r')
-  if econf == nil then
-    error('No econf.sh file found')
-  end
-
-  -- Seek till Files=(
-  for line in econf:lines() do
-    if string.match(line, '^%s*FILES=%(') then break end
-  end
-
-  -- Read in dotfiles
-  local dotfiles = {}
-  for line in econf:lines() do
-    if string.match(line, '^%s*$') then break end
-    local file_path = string.match(line, '.* - (.*)"$')
-    table.insert(dotfiles, file_path)
-  end
-
-  if vim.tbl_isempty(dotfiles) then
-    error('No dotfiles found in array FILES in econf.sh')
-  end
-
-  econf:close()
-  return dotfiles
-end
-
 local M = {}
 
-M.delete_buffer = function()
-  require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
-    require("astronvim.utils.buffer").close(
-      bufnr)
-  end)
-end
-
 M.delete_hidden_buffers = function()
-  local all_bufs = vim.tbl_filter(
-    function(buf)
-      return vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted
-    end,
-    vim.api.nvim_list_bufs()
-  )
+  local all_bufs = vim.tbl_filter(function(buf)
+    return vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted
+  end, vim.api.nvim_list_bufs())
   local all_wins = vim.api.nvim_list_wins()
   local visible_bufs = {}
   for _, win in ipairs(all_wins) do
@@ -54,7 +15,7 @@ M.delete_hidden_buffers = function()
       vim.cmd.bwipeout({ count = buf, bang = true })
     end
   end
-  print('All hidden buffers have been deleted')
+  print("All hidden buffers have been deleted")
 end
 
 M.scratch_buffer = function()
@@ -69,72 +30,65 @@ M.scratch_buffer = function()
         end
       end
     end
-    vim.cmd('vert sbuffer ' .. buf_nr)
+    vim.cmd("vert sbuffer " .. buf_nr)
     return
   end
 
   local buf_nr = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_name(buf_nr, 'scratch')
+  vim.api.nvim_buf_set_name(buf_nr, "scratch")
   vim.g.scratch_nr = buf_nr
   vim.cmd.vnew()
   vim.api.nvim_win_set_buf(0, buf_nr)
 end
 
-M.find_org_files = function()
-  require('telescope.builtin').find_files({
-    search_dirs = {
-      '~/playground/projects/org_files/',
-      '~/playground/dev/illumina/ticket_notes/work/',
-    },
-    prompt_title = 'Org Files',
-  })
-end
-
-M.find_second_brain_files = function()
-  require('telescope.builtin').find_files({
-    search_dirs = { '~/playground/projects/second_brain' },
-    prompt_title = 'Second Brain Files',
-  })
-end
-
-M.find_dotfiles = function()
-  require('telescope.builtin').find_files({
-    search_dirs = get_dotfiles(),
-    prompt_title = 'Find Dotfiles',
-  })
-end
-
-M.rename_buffer = function()
+M.rename_file = function()
   local original_filename = vim.api.nvim_buf_get_name(0)
-  local prompt = 'Rename: '
+  local prompt = "Rename: "
 
-  local new_filename = vim.fn.input({
+  vim.ui.input({
     prompt = prompt,
     default = original_filename,
-    completion = 'file',
-  })
+    completion = "file",
+  }, function(new_filename)
+    if new_filename == "" or new_filename == nil then
+      return
+    end
 
-  if new_filename == '' then
-    return
-  end
-
-  vim.cmd('update | saveas ++p ' .. new_filename)
-  local alternate_bufnr = vim.fn.bufnr('#')
-  if vim.fn.bufexists(alternate_bufnr) then
-    vim.api.nvim_buf_delete(alternate_bufnr, {})
-  end
-  vim.fn.delete(original_filename)
-  print('Renamed to ' .. new_filename)
+    vim.cmd("update | saveas ++p " .. new_filename)
+    local alternate_bufnr = vim.fn.bufnr("#")
+    if vim.fn.bufexists(alternate_bufnr) then
+      vim.api.nvim_buf_delete(alternate_bufnr, {})
+    end
+    vim.fn.delete(original_filename)
+    print("Renamed to " .. new_filename)
+  end)
 end
 
--- Journal stuff
 M.start_journal = function()
-  local journal_dir = '~/playground/projects/second_brain/Resources/journal/'
-  local journal_path = vim.fs.normalize(string.format('%s/%s.md', journal_dir, os.date('%Y-%m-%d')))
-  vim.cmd('tabedit ' .. journal_path)
+  local journal_dir = "~/playground/projects/second_brain/Resources/journal/"
+  local journal_path = vim.fs.normalize(string.format("%s/%s.md", journal_dir, os.date("%Y-%m-%d")))
+  vim.cmd("tabedit " .. journal_path)
 end
 
--- vim.keymap.set('n', '<leader>rt', M.journal_search)
+function M.set_indent()
+  vim.ui.input({
+    prompt = "Set indent value (>0 expandtab, <=0 noexpandtab): ",
+  }, function(new_indent)
+    new_indent = tonumber(new_indent)
+    if new_indent == nil or new_indent == 0 then
+      return
+    end
+
+    vim.bo.expandtab = (new_indent > 0)
+    new_indent = math.abs(new_indent)
+    vim.bo.tabstop = new_indent
+    vim.bo.softtabstop = new_indent
+    vim.bo.shiftwidth = new_indent
+    print("Indent set to " .. new_indent)
+  end)
+end
+
+-- vim.keymap.set('n', '<leader>rt', M.rename_buffer)
 -- vim.keymap.set('n', '<leader>rr', ':update | luafile %<cr>')
 
 return M

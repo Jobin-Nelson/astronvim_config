@@ -66,10 +66,14 @@ return {
     },
     config = function(plugin, opts)
       local actions = require "telescope.actions"
-      opts.defaults.mappings.i["<C-n>"] = actions.move_selection_next
-      opts.defaults.mappings.i["<C-p>"] = actions.move_selection_previous
-      opts.defaults.mappings.i["<C-j>"] = actions.cycle_history_next
-      opts.defaults.mappings.i["<C-k>"] = actions.cycle_history_prev
+      opts.defaults.mappings.i = {
+        ["<C-n>"] = actions.move_selection_next,
+        ["<C-p>"] = actions.move_selection_previous,
+        ["<C-j>"] = actions.cycle_history_next,
+        ["<C-k>"] = actions.cycle_history_prev,
+        ["<C-s>"] = actions.cycle_previewers_next,
+        ["<C-a>"] = actions.cycle_previewers_prev,
+      }
       opts.pickers = {
         buffers = {
           mappings = {
@@ -114,4 +118,14 @@ return {
       return opts
     end,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      indent = {
+        char = "│",
+      },
+      scope = { enabled = false },
+    },
+  }
 }

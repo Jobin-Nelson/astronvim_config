@@ -4,8 +4,36 @@ local sorters = require('telescope.sorters')
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 local conf = require('telescope.config').values
-local utils = require('telescope.utils')
 local dropdown_theme = require('telescope.themes').get_dropdown()
+
+local function get_dotfiles()
+  local econf_file = vim.fn.expand('~/.local/bin/econf.sh')
+
+  local econf = io.open(econf_file, 'r')
+  if econf == nil then
+    error('No econf.sh file found')
+  end
+
+  -- Seek till Files=(
+  for line in econf:lines() do
+    if string.match(line, '^%s*FILES=%(') then break end
+  end
+
+  -- Read in dotfiles
+  local dotfiles = {}
+  for line in econf:lines() do
+    if string.match(line, '^%s*$') then break end
+    local file_path = string.match(line, '.* - (.*)"$')
+    table.insert(dotfiles, file_path)
+  end
+  econf:close()
+
+  if vim.tbl_isempty(dotfiles) then
+    error('No dotfiles found in array FILES in econf.sh')
+  end
+
+  return dotfiles
+end
 
 local function get_projects()
   local project_dir = vim.fs.normalize('~/playground/projects')
@@ -71,10 +99,14 @@ end
 
 M.find_zoxide = function()
   local opts = dropdown_theme
+
+  if vim.fn.executable('zoxide') ~= 1 then
+    error('No zoxide found in the system')
+  end
+
   pickers.new(opts, {
     prompt_title = 'Zoxide',
-    finder = finders.new_table({
-      results = utils.get_os_command_output(vim.fn.split('zoxide query -ls')),
+    finder = finders.new_oneshot_job(vim.fn.split('zoxide query -ls'), {
       entry_maker = zoxide_entry_maker,
     }),
     sorter = sorters.get_generic_fuzzy_sorter(opts),
@@ -88,6 +120,40 @@ M.find_zoxide = function()
       return true
     end
   }):find()
+end
+
+M.find_config = function()
+  require('telescope.builtin').find_files({
+    search_dirs = {
+      '~/.config/default-nvim/init.lua',
+      '~/.config/default-nvim/lua',
+    },
+    prompt_title = 'Find Config',
+  })
+end
+
+M.find_org_files = function()
+  require('telescope.builtin').find_files({
+    search_dirs = {
+      '~/playground/projects/org_files/',
+      '~/playground/dev/illumina/ticket_notes/work/',
+    },
+    prompt_title = 'Org Files',
+  })
+end
+
+M.find_second_brain_files = function()
+  require('telescope.builtin').find_files({
+    search_dirs = { '~/playground/projects/second_brain' },
+    prompt_title = 'Second Brain Files',
+  })
+end
+
+M.find_dotfiles = function()
+  require('telescope.builtin').find_files({
+    search_dirs = get_dotfiles(),
+    prompt_title = 'Find Dotfiles',
+  })
 end
 
 M.find_journal = function()
