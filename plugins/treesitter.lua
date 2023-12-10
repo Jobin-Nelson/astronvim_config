@@ -28,9 +28,13 @@ return {
     },
   },
   {
-  "nvim-treesitter/nvim-treesitter-context",
-  enable = true,
-  event = "User AstroFile",
-  opts = { mode = "cursor", max_lines = 3 },
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "User AstroFile",
+    opts = { mode = "cursor", max_lines = 3 },
+  },
+  {
+    'nvim-treesitter/playground',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    cmd = 'TSPlaygroundToggle',
   }
 }
