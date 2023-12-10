@@ -51,8 +51,8 @@ return {
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
-    ['<A-h>'] = { '<C-\\><C-n><cmd>ToggleTerm direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
-    ['<A-v>'] = { '<C-\\><C-n><cmd>ToggleTerm direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
+    ['<A-h>'] = { '<esc><cmd>ToggleTerm direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
+    ['<A-v>'] = { '<esc><cmd>ToggleTerm direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
     ['<C-w>'] = { '<C-\\><C-n><C-w>', desc = 'ToggleTerm window command' },
   },
 }

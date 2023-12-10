@@ -2,9 +2,9 @@ return {
   "catppuccin/nvim",
   name = "catppuccin",
   opts = {
-    transparent_background = false,
+    transparent_background = true,
     dim_inactive = {
-      enabled = true,
+      enabled = false,
       shade = 'dark',
       percentage = 0.15,
     },

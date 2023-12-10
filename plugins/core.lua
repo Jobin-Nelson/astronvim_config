@@ -22,13 +22,6 @@ return {
       return opts
     end,
   },
-  { "jay-babu/mason-nvim-dap.nvim", enabled = false },
-  { "nvim-dap",                     enabled = false },
-  { "nvim-dap-ui",                  enabled = false },
-  { "max397574/better-escape.nvim", enabled = false },
-  { "guess-indent.nvim",            enabled = false },
-  { "nvim-ufo",                     enabled = false },
-  -- { 'lukas-reineke/indent-blankline.nvim', enabled = false},
   {
     'L3MON4D3/LuaSnip',
     config = function(plugin, opts)
@@ -67,7 +60,11 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    opts = function(_, opts)
+    dependencies = {
+      "ghassan0/telescope-glyph.nvim",
+      "xiyaowong/telescope-emoji.nvim",
+    },
+    config = function(plugin, opts)
       local actions = require "telescope.actions"
       opts.defaults.mappings.i["<C-n>"] = actions.move_selection_next
       opts.defaults.mappings.i["<C-p>"] = actions.move_selection_previous
@@ -82,7 +79,10 @@ return {
           }
         }
       }
-      return opts
+      require('plugins.configs.telescope')(plugin, opts)
+      local telescope = require('telescope')
+      telescope.load_extension('emoji')
+      telescope.load_extension('glyph')
     end,
   },
   {

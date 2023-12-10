@@ -18,7 +18,7 @@ return {
     updatecount = 0,
     -- showbreak = '>',
     diffopt = { "internal", "filler", "closeoff", "hiddenoff", "algorithm:minimal" },
-    iskeyword = vim.opt.iskeyword + '-',
+    -- iskeyword = vim.opt.iskeyword + '-',
     formatoptions = vim.opt.formatoptions
         - "a"  -- Auto formatting is BAD.
         - "t"  -- Don't auto format my code. I got linters for that.
