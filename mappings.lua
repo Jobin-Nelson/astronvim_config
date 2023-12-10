@@ -39,6 +39,7 @@ return {
     -- others
     ["<leader>j"] = { name = "Custom Mappings" },
     ["<leader>w"] = { name = "Work Mappings" },
+    ['<leader>ur'] = { '<cmd>nohlsearch <bar> diffupdate <bar> normal! <C-L><CR>', desc = 'UI Refresh' },
     ['<leader>jr'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Replace word' },
     ['<leader>we'] = { "<cmd>lua require('user.jobin.work_stuff.email_update').open()<cr>", desc = 'Send Email Update' },
     ['<leader>wt'] = { "<cmd>lua require('user.jobin.work_stuff.get_ticket').populate_ticket()<cr>", desc = 'Source Ticket' },

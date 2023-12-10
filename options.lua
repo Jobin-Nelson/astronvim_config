@@ -9,7 +9,7 @@ return {
     wrap = false,          -- sets vim.opt.wrap
     scrolloff = 8,
     sidescrolloff = 10,
-    cursorline = false,
+    cursorline = true,
     conceallevel = 2,
     cmdheight = 1,
     linebreak = true,
