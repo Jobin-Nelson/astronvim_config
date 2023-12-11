@@ -1,9 +1,21 @@
 return {
   'nvim-orgmode/orgmode',
+  dependencies = {
+    { 'nvim-treesitter/nvim-treesitter', lazy = true },
+  },
   event = 'VeryLazy',
-  lazy = false,
   config = function()
     require('orgmode').setup_ts_grammar()
+    require('nvim-treesitter.configs').setup({
+      ensure_installed = { 'org' },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { 'org' },
+      },
+      incremental_selection = {
+          enable = false,
+      },
+    })
     require('orgmode').setup({
       org_agenda_files = {
         '~/playground/projects/org_files/**/*',

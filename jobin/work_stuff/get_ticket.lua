@@ -6,7 +6,7 @@
 -- Output the result to buffer
 
 local function get_issue_id()
-  return vim.fn.expand('<cword>')
+  return vim.fn.expand('<cWORD>')
 end
 
 -- example json file
