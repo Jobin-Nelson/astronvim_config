@@ -65,9 +65,20 @@ M.rename_file = function()
 end
 
 M.start_journal = function()
-  local journal_dir = "~/playground/projects/second_brain/Resources/journal/"
-  local journal_path = vim.fs.normalize(string.format("%s/%s.md", journal_dir, os.date("%Y-%m-%d")))
+  local second_brain = vim.fs.normalize("~/playground/projects/second_brain")
+  local journal_dir = second_brain .. '/Resources/journal'
+  local template_file = second_brain .. '/Templates/daily_note_template.md'
+
+  local journal_path = string.format("%s/%s.md", journal_dir, os.date("%Y-%m-%d"))
+
   vim.cmd("tabedit " .. journal_path)
+  local filesize = vim.fn.getfsize(journal_path)
+  if filesize < 1 and filesize ~= -2 then
+    vim.cmd('0read ' .. template_file)
+  end
+  vim.cmd('lcd ' .. second_brain)
+  vim.opt_local.wrap = true
+  vim.opt_local.linebreak = true
 end
 
 function M.set_indent()

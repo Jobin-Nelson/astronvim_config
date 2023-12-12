@@ -143,9 +143,19 @@ M.find_org_files = function()
 end
 
 M.find_second_brain_files = function()
+  local second_brain = vim.fs.normalize('~/playground/projects/second_brain')
   require('telescope.builtin').find_files({
-    search_dirs = { '~/playground/projects/second_brain' },
+    search_dirs = { second_brain },
     prompt_title = 'Second Brain Files',
+    attach_mappings = function(_, map)
+      map('i', '<C-y>', function()
+        local entry = action_state.get_selected_entry()
+        local relative_path = string.sub(entry.value, #second_brain + 2)
+        vim.fn.setreg("+", relative_path)
+        print('Copied ' .. relative_path)
+      end)
+      return true
+    end,
   })
 end
 

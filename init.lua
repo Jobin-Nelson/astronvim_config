@@ -83,13 +83,6 @@ return {
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
     local my_group = vim.api.nvim_create_augroup('my_group', { clear = true })
-
-    vim.api.nvim_create_autocmd('FileType', {
-      pattern = 'markdown',
-      command = 'setlocal wrap',
-      group = my_group,
-    })
-
     -- for quick execution of python files
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'python',
