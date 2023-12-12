@@ -71,12 +71,11 @@ local function setup_email(current_update, previous_update)
   end
 end
 
-local function email_win_leave_callback(original_win)
+local function email_win_leave_callback()
   local tab_bufs = vim.fn.tabpagebuflist()
   vim.cmd("tabclose")
   vim.print("Updated today's email")
 
-  vim.api.nvim_set_current_win(original_win)
   if tab_bufs == 0 then
     return
   end
@@ -85,18 +84,17 @@ local function email_win_leave_callback(original_win)
   end
 end
 
-local function setup_keymap(original_win)
+local function setup_keymap()
   vim.keymap.set("n", "q", function()
-    email_win_leave_callback(original_win)
+    email_win_leave_callback()
   end, { buffer = 0, noremap = true })
 end
 
 local function capture_email(_, data)
   local current_update = vim.fs.normalize(data[1])
   local previous_update = get_previous_update(current_update)
-  local current_win = vim.api.nvim_get_current_win()
   setup_email(current_update, previous_update)
-  setup_keymap(current_win)
+  setup_keymap()
 end
 
 local M = {}
