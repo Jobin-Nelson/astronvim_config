@@ -6,6 +6,8 @@ local action_state = require('telescope.actions.state')
 local conf = require('telescope.config').values
 local dropdown_theme = require('telescope.themes').get_dropdown()
 
+local second_brain = vim.fs.normalize('~/playground/projects/second_brain')
+
 local function get_dotfiles()
   local econf_file = vim.fn.expand('~/.local/bin/econf.sh')
 
@@ -85,7 +87,7 @@ M.find_projects = function()
       end,
     }),
     sorter = conf.generic_sorter(opts),
-    attach_mappings = function(prompt_bufnr, map)
+    attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry()
@@ -110,7 +112,7 @@ M.find_zoxide = function()
       entry_maker = zoxide_entry_maker,
     }),
     sorter = sorters.get_generic_fuzzy_sorter(opts),
-    attach_mappings = function(prompt_bufnr, map)
+    attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry()
@@ -142,8 +144,24 @@ M.find_org_files = function()
   })
 end
 
+M.insert_second_brain_template = function()
+  local template_dir = second_brain .. '/Resources/Templates'
+  require('telescope.builtin').find_files({
+    search_dirs = { template_dir },
+    prompt_title = 'Insert Template',
+    attach_mappings = function(prompt_bufnr, _)
+      actions.select_default:replace(function()
+        actions.close(prompt_bufnr)
+        local selection = action_state.get_selected_entry()
+        vim.cmd('read ' .. selection.value)
+        print('Inserted ' .. vim.fs.basename(selection.value))
+      end)
+      return true
+    end
+  })
+end
+
 M.find_second_brain_files = function()
-  local second_brain = vim.fs.normalize('~/playground/projects/second_brain')
   require('telescope.builtin').find_files({
     search_dirs = { second_brain },
     prompt_title = 'Second Brain Files',

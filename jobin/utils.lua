@@ -67,7 +67,7 @@ end
 M.start_journal = function()
   local second_brain = vim.fs.normalize("~/playground/projects/second_brain")
   local journal_dir = second_brain .. '/Resources/journal'
-  local template_file = second_brain .. '/Templates/daily_note_template.md'
+  local template_file = second_brain .. '/Resources/Templates/daily_note_template.md'
 
   local journal_path = string.format("%s/%s.md", journal_dir, os.date("%Y-%m-%d"))
 

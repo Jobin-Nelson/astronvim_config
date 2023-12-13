@@ -23,7 +23,6 @@ return {
 
     -- telescope
     ['<leader>fO'] = { "<cmd>lua require('user.jobin.my_pickers').find_org_files()<cr>", desc = 'Find Org Files' },
-    ['<leader>fs'] = { "<cmd>lua require('user.jobin.my_pickers').find_second_brain_files()<cr>", desc = 'Find Second Brain Files' },
     ['<leader>fd'] = { "<cmd>lua require('user.jobin.my_pickers').find_dotfiles()<cr>", desc = 'Find Dotfiles' },
     ['<leader>fp'] = { "<cmd>lua require('user.jobin.my_pickers').find_projects()<cr>", desc = 'Find projects' },
     ['<leader>fz'] = { "<cmd>lua require('user.jobin.my_pickers').find_zoxide()<cr>", desc = 'Find projects' },
@@ -31,6 +30,9 @@ return {
     ['<leader>fB'] = { "<cmd>Telescope builtin<cr>", desc = 'Find Builtins' },
     ['<leader>fe'] = { "<cmd>Telescope emoji<cr>", desc = 'Find Emoji' },
     ['<leader>fg'] = { "<cmd>Telescope glyph<cr>", desc = 'Find Glyph' },
+    ['<leader>fs'] = { name = 'Second Brain' },
+    ['<leader>fss'] = { "<cmd>lua require('user.jobin.my_pickers').find_second_brain_files()<cr>", desc = 'Find Second Brain Files' },
+    ['<leader>fsi'] = { "<cmd>lua require('user.jobin.my_pickers').insert_second_brain_template()<cr>", desc = 'Insert Second Brain Templates' },
 
     -- terminal
     ['<A-h>'] = { '<cmd>ToggleTerm size=20 direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
