@@ -165,16 +165,41 @@ M.find_second_brain_files = function()
   require('telescope.builtin').find_files({
     search_dirs = { second_brain },
     prompt_title = 'Second Brain Files',
-    attach_mappings = function(_, map)
-      map('i', '<C-y>', function()
-        local entry = action_state.get_selected_entry()
-        local relative_path = string.sub(entry.value, #second_brain + 2)
-        vim.fn.setreg("+", relative_path)
-        print('Copied ' .. relative_path)
+  })
+end
+
+M.move_file = function()
+  local opts = dropdown_theme
+  local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+  local cwd = require('user.jobin.utils').get_git_root(parent) or vim.loop.cwd()
+  local rename_file = require('user.jobin.utils').rename_file
+
+  local cmd = {'find', cwd, '-type', 'd'}
+  -- fd doesn't return cwd
+  -- if vim.fn.executable('fd') == 0 then
+  --   cmd = {'fd', '-td', '.', cwd}
+  -- end
+  opts.entry_maker = function(entry)
+    return {
+      value = entry,
+      ordinal = entry,
+      display = './' .. string.sub(entry, #cwd + 2),
+      path = entry,
+    }
+  end
+  pickers.new(opts, {
+    prompt_title = 'Move File',
+    finder = finders.new_oneshot_job(cmd, opts),
+    sorter = conf.generic_sorter(opts),
+    attach_mappings = function(prompt_bufnr, _)
+      actions.select_default:replace(function()
+        actions.close(prompt_bufnr)
+        local selection = action_state.get_selected_entry()
+        rename_file(selection.value)
       end)
       return true
-    end,
-  })
+    end
+  }):find()
 end
 
 M.find_dotfiles = function()

@@ -27,6 +27,7 @@ return {
     ['<leader>fp'] = { "<cmd>lua require('user.jobin.my_pickers').find_projects()<cr>", desc = 'Find projects' },
     ['<leader>fz'] = { "<cmd>lua require('user.jobin.my_pickers').find_zoxide()<cr>", desc = 'Find projects' },
     ['<leader>fj'] = { "<cmd>lua require('user.jobin.my_pickers').find_journal()<cr>", desc = 'Find Journal' },
+    ['<leader>fM'] = { "<cmd>lua require('user.jobin.my_pickers').move_file()<cr>", desc = 'Move file' },
     ['<leader>fB'] = { "<cmd>Telescope builtin<cr>", desc = 'Find Builtins' },
     ['<leader>fe'] = { "<cmd>Telescope emoji<cr>", desc = 'Find Emoji' },
     ['<leader>fg'] = { "<cmd>Telescope glyph<cr>", desc = 'Find Glyph' },
@@ -39,6 +40,8 @@ return {
     ['<A-v>'] = { '<cmd>ToggleTerm size=80 direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
 
     -- others
+    [']q'] = { "<cmd>cnext<cr>", desc = 'Next QuickFix' },
+    ['[q'] = { "<cmd>cprevious<cr>", desc = 'Previous QuickFix' },
     ["<leader>j"] = { name = "Custom Mappings" },
     ["<leader>w"] = { name = "Work Mappings" },
     ['<leader>ur'] = { '<cmd>nohlsearch <bar> diffupdate <bar> normal! <C-L><CR>', desc = 'UI Refresh' },
@@ -49,8 +52,7 @@ return {
     ['<leader>jj'] = { "<cmd>lua require('user.jobin.utils').start_journal()<cr>", desc = 'Start Journal' },
     ['<leader>jt'] = { "<cmd>lua require('user.jobin.work_stuff.test_tracking').generate_csv()<cr>", desc = 'Test Tracking' },
     ['<leader>jT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
-    [']q'] = { "<cmd>cnext<cr>", desc = 'Next QuickFix' },
-    ['[q'] = { "<cmd>cprevious<cr>", desc = 'Previous QuickFix' },
+    ['<leader>jc'] = { "<cmd>lua require('user.jobin.utils').cd_git_root()<cr>", desc = 'Change dir to git root' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },

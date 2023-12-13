@@ -65,7 +65,8 @@ return {
       "xiyaowong/telescope-emoji.nvim",
     },
     config = function(plugin, opts)
-      local actions = require "telescope.actions"
+      local actions = require("telescope.actions")
+      local my_actions = require('user.jobin.my_actions')
       opts.defaults.mappings.i = {
         ["<C-n>"] = actions.move_selection_next,
         ["<C-p>"] = actions.move_selection_previous,
@@ -73,6 +74,7 @@ return {
         ["<C-k>"] = actions.cycle_history_prev,
         ["<C-s>"] = actions.cycle_previewers_next,
         ["<C-a>"] = actions.cycle_previewers_prev,
+        ["<A-y>"] = my_actions.copy_entry,
       }
       opts.pickers = {
         buffers = {

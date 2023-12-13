@@ -1,3 +1,6 @@
+-- Major shoutout to
+-- https://github.com/ibhagwan/nvim-lua/blob/main/lua/utils.lua
+
 local M = {}
 
 M.delete_hidden_buffers = function()
@@ -41,27 +44,35 @@ M.scratch_buffer = function()
   vim.api.nvim_win_set_buf(0, buf_nr)
 end
 
-M.rename_file = function()
+M.rename_file = function(target)
   local original_filename = vim.api.nvim_buf_get_name(0)
-  local prompt = "Rename: "
-
-  vim.ui.input({
-    prompt = prompt,
-    default = original_filename,
-    completion = "file",
-  }, function(new_filename)
+  local function move_file(new_filename)
     if new_filename == "" or new_filename == nil then
       return
     end
 
     vim.cmd("update | saveas ++p " .. new_filename)
+---@diagnostic disable-next-line: param-type-mismatch
     local alternate_bufnr = vim.fn.bufnr("#")
     if vim.fn.bufexists(alternate_bufnr) then
       vim.api.nvim_buf_delete(alternate_bufnr, {})
     end
     vim.fn.delete(original_filename)
     print("Renamed to " .. new_filename)
-  end)
+  end
+
+  if target then
+    if vim.fn.isdirectory(target) == 1 then
+      target = target .. '/' .. vim.fs.basename(original_filename)
+    end
+    move_file(target)
+  else
+    vim.ui.input({
+      prompt =  "Rename: ",
+      default = original_filename,
+      completion = "file",
+    }, move_file)
+  end
 end
 
 M.start_journal = function()
@@ -97,6 +108,38 @@ function M.set_indent()
     vim.bo.shiftwidth = new_indent
     print("Indent set to " .. new_indent)
   end)
+end
+
+function M.get_git_root(cwd)
+  local cmd = { 'git', 'rev-parse', '--show-toplevel' }
+  if cwd then
+    table.insert(cmd, 2, '-C')
+    table.insert(cmd, 3, cwd)
+  end
+  local output = vim.fn.systemlist(cmd)
+  if vim.v.shell_error ~= 0 then
+    return nil
+  end
+  return output[1]
+end
+
+function M.cd_git_root()
+  local parent = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+  local git_root = M.get_git_root(parent)
+  if not git_root then
+    print('Not a git repo: ' .. parent or vim.loop.cwd())
+    return
+  end
+  if git_root == vim.loop.cwd() then
+    print('Already at git root: ' .. git_root)
+    return
+  end
+  if vim.loop.fs_stat(git_root) then
+    vim.cmd.cd(git_root)
+    print('Directory changed to ' .. git_root)
+  else
+    error(git_root .. ' not accessible')
+  end
 end
 
 -- vim.keymap.set('n', '<leader>rt', M.rename_buffer)
