@@ -33,7 +33,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true, -- enable or disable format on save globally
+        enabled = false, -- enable or disable format on save globally
         filter = function(bufnr)
           local bufname = vim.api.nvim_buf_get_name(bufnr)
           return string.match(bufname, '.*illumina.*') == nil
@@ -56,16 +56,16 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
-      'rust_analyzer',
+      -- 'rust_analyzer',
     },
     config = {
-      rust_analyzer = function()
-        return {
-          cmd = { "rustup", "run", "stable", "rust-analyzer" },
-          filetypes = { "rust" },
-          root_dir = require('lspconfig.util').root_pattern("Cargo.toml"),
-        }
-      end,
+      -- rust_analyzer = function()
+      --   return {
+      --     cmd = { "rustup", "run", "stable", "rust-analyzer" },
+      --     filetypes = { "rust" },
+      --     root_dir = require('lspconfig.util').root_pattern("Cargo.toml"),
+      --   }
+      -- end,
     }
   },
   -- Configure require("lazy").setup() options
@@ -74,7 +74,17 @@ return {
     performance = {
       rtp = {
         -- customize default disabled vim plugins
-        disabled_plugins = { "tohtml", "gzip", "matchit", "zipPlugin", "netrwPlugin", "tarPlugin" },
+        disabled_plugins = {
+          "tohtml",
+          "gzip",
+          "matchit",
+          -- "matchparen",
+          "zipPlugin",
+          "netrwPlugin",
+          "tarPlugin",
+          "tutor",
+          "zipPlugin",
+        },
       },
     },
   },

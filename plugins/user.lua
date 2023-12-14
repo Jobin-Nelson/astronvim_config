@@ -11,7 +11,7 @@ return {
   -- },
   { 'dhruvasagar/vim-zoom',       event = 'User AstroFile' },
   { 'dhruvasagar/vim-table-mode', event = 'User AstroFile' },
-  { 'tpope/vim-fugitive',         event = 'VeryLazy' },
+  -- { 'tpope/vim-fugitive',         event = 'VeryLazy' },
   { 'kylechui/nvim-surround',     event = 'User AstroFile', opts = {} },
   { 'David-Kunz/gen.nvim',        event = 'VeryLazy'},
   { 'sindrets/diffview.nvim',     event = 'User AstroGitFile'},

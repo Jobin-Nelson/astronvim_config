@@ -7,4 +7,5 @@ return {
   { "nvim-ufo",                     enabled = false },
   { "cmp-dap",                      enabled = false },
   -- { 'lukas-reineke/indent-blankline.nvim', enabled = false},
+  { "mfussenegger/nvim-dap-python", enabled = false },
 }
