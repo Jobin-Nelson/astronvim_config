@@ -33,10 +33,10 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false, -- enable or disable format on save globally
+        enabled = true, -- enable or disable format on save globally
         filter = function(bufnr)
-          local bufname = vim.api.nvim_buf_get_name(bufnr)
-          return string.match(bufname, '.*illumina.*') == nil
+          -- local bufname = vim.api.nvim_buf_get_name(bufnr)
+          -- return string.match(bufname, '.*illumina.*') == nil
         end,
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
