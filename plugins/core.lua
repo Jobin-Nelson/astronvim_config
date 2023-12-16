@@ -23,25 +23,25 @@ return {
     end,
   },
   {
-    'L3MON4D3/LuaSnip',
+    "L3MON4D3/LuaSnip",
     config = function(plugin, opts)
-      require "plugins.configs.luasnip" (plugin, opts) -- include the default astronvim config that calls the setup call
-      require('luasnip.loaders.from_lua').load({ paths = { "./lua/user/snippets" } })
+      require "plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
+      require("luasnip.loaders.from_lua").load { paths = { "./lua/user/snippets" } }
     end,
   },
   {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
       local cmp = require "cmp"
-      local luasnip = require('luasnip')
-      opts.mapping['<Tab>'] = cmp.mapping(function(fallback)
+      local luasnip = require "luasnip"
+      opts.mapping["<Tab>"] = cmp.mapping(function(fallback)
         if luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
         else
           fallback()
         end
       end, { "i", "s" })
-      opts.mapping['<S-Tab>'] = cmp.mapping(function(fallback)
+      opts.mapping["<S-Tab>"] = cmp.mapping(function(fallback)
         if luasnip.jumpable(-1) then
           luasnip.jump(-1)
         else
@@ -49,24 +49,25 @@ return {
         end
       end, { "i", "s" })
       opts.sources = cmp.config.sources {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'orgmode' },
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
+        { name = "path" },
+        { name = "orgmode" },
       }
       return opts
     end,
   },
   {
     "nvim-telescope/telescope.nvim",
+    version = "*",
     dependencies = {
       "ghassan0/telescope-glyph.nvim",
       "xiyaowong/telescope-emoji.nvim",
     },
     config = function(plugin, opts)
-      local actions = require("telescope.actions")
-      local my_actions = require('user.jobin.my_actions')
+      local actions = require "telescope.actions"
+      local my_actions = require "user.jobin.my_actions"
       opts.defaults.mappings.i = {
         ["<C-n>"] = actions.move_selection_next,
         ["<C-p>"] = actions.move_selection_previous,
@@ -80,15 +81,15 @@ return {
         buffers = {
           mappings = {
             n = {
-              ['d'] = 'delete_buffer'
-            }
-          }
-        }
+              ["d"] = "delete_buffer",
+            },
+          },
+        },
       }
-      require('plugins.configs.telescope')(plugin, opts)
-      local telescope = require('telescope')
-      telescope.load_extension('emoji')
-      telescope.load_extension('glyph')
+      require "plugins.configs.telescope"(plugin, opts)
+      local telescope = require "telescope"
+      telescope.load_extension "emoji"
+      telescope.load_extension "glyph"
     end,
   },
   {
@@ -100,12 +101,23 @@ return {
   {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
-      local status = require("astronvim.utils.status")
+      local status = require "astronvim.utils.status"
+      local conditions = require('heirline.conditions')
+      local filename = {
+        fname = function(nr)
+          local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(nr), ':.')
+          if not conditions.width_percent_below(#name, 0.25) then
+            name = vim.fn.pathshorten(name)
+          end
+          return name
+        end,
+        modify = '',
+      }
       opts.statusline = {
         hl = { fg = "fg", bg = "bg" },
         status.component.mode(),
         status.component.git_branch(),
-        status.component.file_info { filetype = false, filename = {}, file_modified = {} },
+        status.component.file_info { filetype = false, filename = filename, file_modified = {} },
         status.component.git_diff(),
         status.component.diagnostics(),
         status.component.fill(),
@@ -129,5 +141,5 @@ return {
       },
       scope = { enabled = false },
     },
-  }
+  },
 }

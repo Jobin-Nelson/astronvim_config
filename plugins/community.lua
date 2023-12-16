@@ -8,9 +8,9 @@ return {
   -- { import = "astrocommunity.completion.codeium-vim" },
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
   { import = "astrocommunity.indent.mini-indentscope" },
+  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.python" },
-  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.json" },
 }

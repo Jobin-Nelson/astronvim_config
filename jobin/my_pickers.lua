@@ -183,7 +183,7 @@ M.move_file = function()
     return {
       value = entry,
       ordinal = entry,
-      display = './' .. string.sub(entry, #cwd + 2),
+      display = string.sub(entry, #cwd + 2),
       path = entry,
     }
   end
