@@ -18,7 +18,6 @@ return {
     ["<leader>bo"] = { "<cmd>update <bar> %bdelete <bar> edit# <bar> bdelete #<CR>", desc = "Delete other buffers" },
     ["<leader>bD"] = { "<cmd>lua require('user.jobin.utils').delete_buffer()<cr>", desc = "Pick to close", },
     ["<leader>bh"] = { "<cmd>lua require('user.jobin.utils').delete_hidden_buffers()<cr>", desc = "Delete hidden buffers" },
-    ["<leader>bR"] = { "<cmd>lua require('user.jobin.utils').rename_file()<cr>", desc = 'Rename buffer' },
     ["<leader>bk"] = { "<cmd>call delete(expand('%:p')) <bar> bdelete!<cr>", desc = 'Kill buffer & delete file' },
 
     -- telescope
@@ -45,14 +44,15 @@ return {
     ["<leader>j"] = { name = "Custom Mappings" },
     ["<leader>w"] = { name = "Work Mappings" },
     ['<leader>ur'] = { '<cmd>nohlsearch <bar> diffupdate <bar> normal! <C-L><CR>', desc = 'UI Refresh' },
-    ['<leader>jr'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Replace word' },
     ['<leader>we'] = { "<cmd>lua require('user.jobin.work_stuff.email_update').open()<cr>", desc = 'Send Email Update' },
     ['<leader>wt'] = { "<cmd>lua require('user.jobin.work_stuff.get_ticket').populate_ticket()<cr>", desc = 'Source Ticket' },
-    ["<leader>js"] = { "<cmd>lua require('user.jobin.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
+    ['<leader>js'] = { ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Substitute word' },
+    ["<leader>jb"] = { "<cmd>lua require('user.jobin.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
     ['<leader>jj'] = { "<cmd>lua require('user.jobin.utils').start_journal()<cr>", desc = 'Start Journal' },
     ['<leader>jt'] = { "<cmd>lua require('user.jobin.work_stuff.test_tracking').generate_csv()<cr>", desc = 'Test Tracking' },
     ['<leader>jT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
     ['<leader>jc'] = { "<cmd>lua require('user.jobin.utils').cd_git_root()<cr>", desc = 'Change dir to git root' },
+    ["<leader>jr"] = { "<cmd>lua require('user.jobin.utils').rename_file()<cr>", desc = 'Rename buffer' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },

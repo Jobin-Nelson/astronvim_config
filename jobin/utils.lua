@@ -44,7 +44,8 @@ M.scratch_buffer = function()
   vim.api.nvim_win_set_buf(0, buf_nr)
 end
 
-M.rename_file = function(target)
+---@param target_dir string
+M.rename_file = function(target_dir)
   local original_filename = vim.api.nvim_buf_get_name(0)
   local function move_file(new_filename)
     if new_filename == "" or new_filename == nil then
@@ -61,11 +62,11 @@ M.rename_file = function(target)
     print("Renamed to " .. new_filename)
   end
 
-  if target then
-    if vim.fn.isdirectory(target) == 1 then
-      target = target .. '/' .. vim.fs.basename(original_filename)
+  if target_dir then
+    if vim.fn.isdirectory(target_dir) == 1 then
+      target_dir = target_dir .. '/' .. vim.fs.basename(original_filename)
     end
-    move_file(target)
+    move_file(target_dir)
   else
     vim.ui.input({
       prompt =  "Rename: ",
@@ -110,6 +111,8 @@ function M.set_indent()
   end)
 end
 
+---@param cwd? string
+---@return string|nil
 function M.get_git_root(cwd)
   local cmd = { 'git', 'rev-parse', '--show-toplevel' }
   if cwd then

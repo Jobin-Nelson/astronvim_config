@@ -60,7 +60,6 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    version = "*",
     dependencies = {
       "ghassan0/telescope-glyph.nvim",
       "xiyaowong/telescope-emoji.nvim",
