@@ -1,5 +1,5 @@
 local rust = {}
-if vim.fn.executable('cargo') then
+if vim.fn.executable('cargo') == 1 then
   rust = { import = "astrocommunity.pack.rust" }
 end
 
