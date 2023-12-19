@@ -53,6 +53,7 @@ return {
     ['<leader>jc'] = { "<cmd>lua require('user.jobin.utils').cd_git_root()<cr>", desc = 'Change dir to git root' },
     ["<leader>jr"] = { "<cmd>lua require('user.jobin.utils').rename_file()<cr>", desc = 'Rename buffer' },
     ['<leader>jm'] = { "<cmd>lua require('user.jobin.my_pickers').move_file()<cr>", desc = 'Move file' },
+    ['<leader>jl'] = { "<cmd>lua require('user.jobin.utils').leet()<cr>", desc = 'Leetcode Daily' },
   },
   v = {
     ['<'] = { '<gv', desc = "Indent inward" },

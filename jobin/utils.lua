@@ -145,6 +145,22 @@ function M.cd_git_root()
   end
 end
 
+function M.leet()
+  if vim.fn.executable('leet.py') ~= 1 then
+    print('leet.py not found')
+    return
+  end
+
+  local cmd = { 'leet.py', '-n' }
+  local output = vim.fn.system(cmd)
+  if vim.v.shell_error ~= 0 then
+    print('leet.py failed execution')
+    return
+  end
+  local leet_file = string.match(output, "(%S+)%s*$")
+  vim.cmd('tabedit ' ..leet_file)
+end
+
 -- vim.keymap.set('n', '<leader>rt', M.rename_buffer)
 -- vim.keymap.set('n', '<leader>rr', ':update | luafile %<cr>')
 
