@@ -3,6 +3,11 @@ if vim.fn.executable('cargo') == 1 then
   rust = { import = "astrocommunity.pack.rust" }
 end
 
+local go = {}
+if vim.fn.executable('go') == 1 then
+  go = { import = "astrocommunity.pack.go" }
+end
+
 return {
   -- Add the community repository of plugin specifications
   "AstroNvim/astrocommunity",
@@ -15,9 +20,9 @@ return {
   { import = "astrocommunity.indent.mini-indentscope" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.json" },
-  { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.bash" },
   { import = "astrocommunity.pack.python" },
-  -- { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.typescript" },
   rust,
+  go,
 }

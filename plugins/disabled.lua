@@ -8,4 +8,5 @@ return {
   { "cmp-dap",                      enabled = false },
   -- { 'lukas-reineke/indent-blankline.nvim', enabled = false},
   { "mfussenegger/nvim-dap-python", enabled = false },
+  { "leoluz/nvim-dap-go",           enabled = false },
 }

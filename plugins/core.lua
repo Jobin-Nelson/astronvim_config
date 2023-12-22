@@ -61,7 +61,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "ghassan0/telescope-glyph.nvim",
       "xiyaowong/telescope-emoji.nvim",
     },
     config = function(plugin, opts)
@@ -88,7 +87,6 @@ return {
       require "plugins.configs.telescope"(plugin, opts)
       local telescope = require "telescope"
       telescope.load_extension "emoji"
-      telescope.load_extension "glyph"
     end,
   },
   {
