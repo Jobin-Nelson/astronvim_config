@@ -7,12 +7,12 @@ return {
     opts = {
       ensure_installed = {
         'bashls',
-        'clangd',
         'pyright',
         'tsserver',
         'lua_ls',
         'emmet_ls',
         'marksman',
+        'gopls',
       }
     },
   },

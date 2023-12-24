@@ -99,6 +99,11 @@ return {
       command = 'nnoremap <F5> <cmd>update <bar> !python %<CR>',
       group = my_group,
     })
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'go',
+      command = 'nnoremap <F5> <cmd>update <bar> !go run %<CR>',
+      group = my_group,
+    })
 
     -- User commands
     vim.api.nvim_create_user_command('DiffOrig', require('user.jobin.commands').diff_original, {})
