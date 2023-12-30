@@ -13,6 +13,7 @@ return {
     conceallevel = 2,
     cmdheight = 1,
     linebreak = true,
+    virtualedit = "",
     equalalways = false,
     breakindent = true,
     breakindentopt = "list:2,min:20,sbr",

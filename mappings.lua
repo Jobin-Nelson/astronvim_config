@@ -48,7 +48,7 @@ return {
     ["<leader>jb"] = { "<cmd>lua require('user.jobin.utils').scratch_buffer()<cr>", desc = "Scratch buffer" },
     ['<leader>jj'] = { "<cmd>lua require('user.jobin.utils').start_journal()<cr>", desc = 'Start Journal' },
     ['<leader>jt'] = { "<cmd>lua require('user.jobin.work_stuff.test_tracking').generate_csv()<cr>", desc = 'Test Tracking' },
-    ['<leader>jT'] = { "<cmd>lua require('user.jobin.org-tangle').tangle()<cr>", desc = 'Org Tangle' },
+    ['<leader>jT'] = { "<cmd>lua require('user.jobin.org_tangle').tangle()<cr>", desc = 'Org Tangle' },
     ['<leader>jc'] = { "<cmd>lua require('user.jobin.utils').cd_git_root()<cr>", desc = 'Change dir to git root' },
     ["<leader>jr"] = { "<cmd>lua require('user.jobin.utils').rename_file()<cr>", desc = 'Rename buffer' },
     ['<leader>jm'] = { "<cmd>lua require('user.jobin.my_pickers').move_file()<cr>", desc = 'Move file' },
@@ -63,8 +63,8 @@ return {
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
-    ['<A-h>'] = { '<esc><cmd>ToggleTerm direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
-    ['<A-v>'] = { '<esc><cmd>ToggleTerm direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
+    -- ['<A-h>'] = { '<esc><cmd>ToggleTerm direction=horizontal<cr>', desc = 'ToggleTerm horizontal split' },
+    -- ['<A-v>'] = { '<esc><cmd>ToggleTerm direction=vertical<cr>', desc = 'ToggleTerm vertical split' },
     ['<C-w>'] = { '<C-\\><C-n><C-w>', desc = 'ToggleTerm window command' },
   },
 }
