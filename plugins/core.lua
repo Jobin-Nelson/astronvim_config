@@ -66,6 +66,7 @@ return {
     config = function(plugin, opts)
       local actions = require "telescope.actions"
       local my_actions = require "user.jobin.my_actions"
+      local trouble = require "trouble.providers.telescope"
       opts.defaults.mappings.i = {
         ["<C-n>"] = actions.move_selection_next,
         ["<C-p>"] = actions.move_selection_previous,
@@ -74,6 +75,7 @@ return {
         ["<C-s>"] = actions.cycle_previewers_next,
         ["<C-a>"] = actions.cycle_previewers_prev,
         ["<A-y>"] = my_actions.copy_entry,
+        ["<A-x>"] = trouble.open_with_trouble,
       }
       opts.pickers = {
         buffers = {
