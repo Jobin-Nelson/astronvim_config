@@ -30,9 +30,4 @@ return {
     event = "User AstroFile",
     opts = { mode = "cursor", max_lines = 3 },
   },
-  {
-    'nvim-treesitter/playground',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    cmd = 'TSPlaygroundToggle',
-  }
 }
